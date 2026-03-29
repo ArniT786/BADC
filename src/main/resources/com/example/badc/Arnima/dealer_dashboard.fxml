@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" 
+            fx:controller="com.example.badc.Arnima.DealerDashboardController">
+    <children>
+        <VBox spacing="12" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+            <children>
+                <Label text="BADC Seed Dealer Portal" />
+                <Separator />
+                <Label text="Welcome, Dealer" />
+                <Separator />
+                <Button fx:id="btnRequestStock" text="Request New Seed Stock" onAction="#openRequestStock" maxWidth="Infinity" />
+                <Button fx:id="btnRecordSale" text="Record Seed Sale" onAction="#openRecordSale" maxWidth="Infinity" />
+                <Button fx:id="btnInventory" text="Check Shop Inventory" onAction="#openInventory" maxWidth="Infinity" />
+                <Button fx:id="btnEarnings" text="View Commission and Earnings" onAction="#openEarnings" maxWidth="Infinity" />
+                <Button fx:id="btnUpdateShop" text="Update Shop Information" onAction="#openUpdateShop" maxWidth="Infinity" />
+                <Button fx:id="btnNotices" text="View Notices from BADC" onAction="#openNotices" maxWidth="Infinity" />
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

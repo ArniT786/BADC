@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" 
+            fx:controller="com.example.badc.Arnima.ScheduleViewController">
+    <children>
+        <VBox spacing="12" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Label text="Seed Distribution Schedule" />
+                <Separator />
+                <HBox spacing="10">
+                    <children>
+                        <Label text="Select District:" />
+                        <ComboBox fx:id="cmbDistrict" prefWidth="180" />
+                        <Button text="Search" onAction="#searchSchedule" />
+                    </children>
+                </HBox>
+                <Separator />
+                <TableView fx:id="tblSchedule" prefHeight="250" prefWidth="550">
+                    <columns>
+                        <TableColumn fx:id="colDistrict" text="District" prefWidth="130" />
+                        <TableColumn fx:id="colDate" text="Date" prefWidth="135.0" />
+                        <TableColumn fx:id="colLocation" text="Location" prefWidth="147.0" />
+                        <TableColumn fx:id="colSeedType" text="Seed Type" prefWidth="146.0" />
+                    </columns>
+                </TableView>
+                <Separator />
+                <Label fx:id="lblMessage" text="" />
+                <Button text="Back" onAction="#goBack" />
+            </children>
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+        </VBox>
+    </children>
+</AnchorPane>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" 
+            fx:controller="com.example.badc.Arnima.FarmerDashboardController">
+    <children>
+        <VBox spacing="15" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Label text="BADC Farmer Portal" />
+                <Separator />
+                <Label text="Welcome, Farmer" />
+                <Separator />
+                <Button fx:id="btnSeedApplication" text="Apply for Seeds" onAction="#openSeedApplication" maxWidth="Infinity" />
+                <Button fx:id="btnIrrigation" text="Request Irrigation Pump" onAction="#openIrrigationRequest" maxWidth="Infinity" />
+                <Button fx:id="btnSchedule" text="View Distribution Schedule" onAction="#openScheduleView" maxWidth="Infinity" />
+                <Button fx:id="btnTrack" text="Track My Application" onAction="#openTrackStatus" maxWidth="Infinity" />
+                <Button fx:id="btnFeedback" text="Submit Feedback" onAction="#openFeedback" maxWidth="Infinity" />
+            </children>
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+        </VBox>
+    </children>
+</AnchorPane>

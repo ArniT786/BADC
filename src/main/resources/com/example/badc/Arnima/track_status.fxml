@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" 
+            fx:controller="com.example.badc.Arnima.TrackStatusController">
+    <children>
+        <VBox spacing="12" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Label text="Track Application Status" />
+                <Separator />
+                <HBox spacing="10">
+                    <children>
+                        <Label text="Enter NID or Tracking ID:" />
+                        <TextField fx:id="txtSearchID" prefWidth="200" />
+                        <Button text="Search" onAction="#searchStatus" />
+                        <Button text="Back" onAction="#goBack" />
+                    </children>
+                </HBox>
+                <Separator />
+                <Label text="Seed Application Result:" />
+                <GridPane hgap="10" vgap="8">
+                    <children>
+                        <Label text="Application ID:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                        <Label fx:id="lblSeedAppID" text="" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                        
+                        <Label text="Seed Type:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                        <Label fx:id="lblSeedType" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        
+                        <Label text="Status:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                        <Label fx:id="lblSeedStatus" text="" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        
+                        <Label text="Remarks:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                        <Label fx:id="lblSeedRemarks" text="" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    </children>
+                </GridPane>
+                <Separator />
+                <Label text="Irrigation Request Result:" />
+                <GridPane hgap="10" vgap="8">
+                    <children>
+                        <Label text="Tracking ID:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                        <Label fx:id="lblIrrigationID" text="" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                        
+                        <Label text="Location:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                        <Label fx:id="lblIrrigationLocation" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        
+                        <Label text="Status:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                        <Label fx:id="lblIrrigationStatus" text="" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    </children>
+                </GridPane>
+                <Separator />
+                <Label fx:id="lblMessage" text="" />
+            </children>
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+        </VBox>
+    </children>
+</AnchorPane>

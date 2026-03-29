@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" 
+            fx:controller="com.example.badc.Arnima.FeedbackController">
+    <children>
+        <VBox spacing="12" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Label text="Submit Feedback or Complaint" />
+                <Separator />
+                <GridPane hgap="10" vgap="10">
+                    <children>
+                        <Label text="Your NID:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                        <TextField fx:id="txtNID" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                        
+                        <Label text="Category:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                        <ComboBox fx:id="cmbCategory" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    </children>
+                </GridPane>
+                <Label text="Your Message:" />
+                <TextArea fx:id="txtMessage" prefHeight="120" prefWidth="400" wrapText="true" />
+                <Separator />
+                <HBox spacing="10">
+                    <children>
+                        <Button text="Submit Feedback" onAction="#submitFeedback" />
+                        <Button text="Clear" onAction="#clearForm" />
+                        <Button text="Back" onAction="#goBack" />
+                    </children>
+                </HBox>
+                <Separator />
+                <Label fx:id="lblMessage" text="" />
+            </children>
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+        </VBox>
+    </children>
+</AnchorPane>
