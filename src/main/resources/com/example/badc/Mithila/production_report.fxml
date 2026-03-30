@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.badc.Mithila.ProductionReportController">
+   <VBox spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <padding>
+         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+      </padding>
+      <Label text="Seasonal Production Report" />
+      <Separator />
+      <GridPane hgap="8.0" vgap="12.0">
+        <columnConstraints>
+          <ColumnConstraints prefWidth="100.0" />
+          <ColumnConstraints prefWidth="400.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints vgrow="SOMETIMES" />
+          <RowConstraints vgrow="SOMETIMES" />
+          <RowConstraints vgrow="SOMETIMES" />
+        </rowConstraints>
+        <Label text="Crop Type :" />
+        <TextField fx:id="cropField" prefWidth="200.0" GridPane.columnIndex="1" />
+        <Label text="Season :" GridPane.rowIndex="1" />
+        <ComboBox fx:id="seasonDrop" prefWidth="180.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <Label text="Officer NID :" GridPane.rowIndex="2" />
+        <TextField fx:id="officerNid" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      </GridPane>
+      <Separator />
+      <HBox spacing="10.0">
+         <Button onAction="#generateReport" text="Generate" />
+         <Button onAction="#clearForm" text="Clear" />
+         <Button onAction="#goBack" text="Cancel" />
+      </HBox>
+      <Separator />
+      <TableView fx:id="productionTable" prefHeight="200.0" prefWidth="540.0">
+        <TableColumn fx:id="colFarmer" prefWidth="120.0" text="Farmer NID" />
+        <TableColumn fx:id="colCrop" prefWidth="120.0" text="Crop" />
+        <TableColumn fx:id="colSeason" prefWidth="120.0" text="Season" />
+        <TableColumn fx:id="colWeight" prefWidth="120.0" text="Total (kg)" />
+      </TableView>
+      <Label fx:id="msgLabel" text="" />
+   </VBox>
+</AnchorPane>
+

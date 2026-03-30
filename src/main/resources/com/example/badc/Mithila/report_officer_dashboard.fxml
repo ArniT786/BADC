@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.badc.Mithila.ReportOfficerDashboardController">
+   <VBox spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <padding>
+         <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+      </padding>
+      <Label text="Report Officer Panel" />
+      <Separator />
+      <Label text="Hello, Report Officer" />
+      <Separator />
+      <Button fx:id="btn1" maxWidth="Infinity" onAction="#openFarmerSummary" text="Farmer Summary Report" />
+      <Button fx:id="btn2" maxWidth="Infinity" onAction="#openProductionReport" text="Seasonal Production Report" />
+      <Button fx:id="btn3" maxWidth="Infinity" onAction="#openFertilizerTrends" text="Fertilizer Usage Trends" />
+      <Button fx:id="btn4" maxWidth="Infinity" onAction="#openVerifyActivities" text="Verify Field Officer Activities" />
+      <Button fx:id="btn5" maxWidth="Infinity" onAction="#openMonitorIssues" text="Monitor Agricultural Issues" />
+      <Button fx:id="btn6" maxWidth="Infinity" onAction="#openSubmitHQ" text="Submit Report to HQ" />
+      <Separator />
+      <Button maxWidth="Infinity" onAction="#handleLogout" text="Logout" />
+   </VBox>
+</AnchorPane>
+

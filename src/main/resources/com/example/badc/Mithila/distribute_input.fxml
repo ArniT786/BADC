@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.badc.Mithila.DistributeInputController">
+   <VBox spacing="12.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <padding>
+         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+      </padding>
+      <Label text="Seed / Fertilizer Distribution" />
+      <Separator />
+      <HBox spacing="10.0">
+         <Label prefWidth="130.0" text="Farmer NID :" />
+         <TextField fx:id="farmerNid" prefWidth="200.0" />
+      </HBox>
+      <HBox>
+         <Label prefWidth="130.0" text="Item Type :" />
+         <ComboBox fx:id="itemTypeDrop" prefWidth="200.0" />
+      </HBox>
+      <HBox spacing="10.0">
+         <Label prefWidth="130.0" text="Item Name :" />
+         <ComboBox fx:id="itemNameDrop" prefWidth="200.0" />
+      </HBox>
+      <HBox>
+         <Label prefWidth="130.0" text="Qty (kg) :" />
+         <TextField fx:id="qtyField" prefWidth="180.0" />
+      </HBox>
+      <Separator />
+      <HBox spacing="6.0">
+         <Button onAction="#checkEligibility" text="Check Eligibility" />
+         <Button onAction="#confirmDistribution" text="Confirm" />
+         <Button onAction="#clearForm" text="Clear" />
+         <Button onAction="#goBack" text="Cancel" />
+      </HBox>
+      <Label fx:id="eligibilityLabel" text="" />
+      <Label fx:id="msgLabel" text="" />
+   </VBox>
+</AnchorPane>
+
