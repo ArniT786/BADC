@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.badc.Meraj.UserManagementController">
+            prefHeight="450.0" prefWidth="700.0">
+
+    <children>
+
+
+        <Label text="User Management"
+               layoutX="250" layoutY="15"
+               style="-fx-font-size:20px; -fx-font-weight:bold;" />
+
+
+        <TableView fx:id="userTable"
+                   layoutX="40" layoutY="60"
+                   prefHeight="250" prefWidth="620">
+
+            <columns>
+                <TableColumn fx:id="colId" text="User ID" prefWidth="120"/>
+                <TableColumn fx:id="colName" text="Name" prefWidth="200"/>
+                <TableColumn fx:id="colRole" text="Role" prefWidth="150"/>
+                <TableColumn fx:id="colStatus" text="Status" prefWidth="150"/>
+            </columns>
+
+        </TableView>
+
+
+        <Label text="Name:" layoutX="60" layoutY="330"/>
+        <TextField fx:id="txtName"
+                   layoutX="120" layoutY="325"
+                   prefWidth="180"/>
+
+        <Label text="Role:" layoutX="330" layoutY="330"/>
+        <ComboBox fx:id="cmbRole"
+                  layoutX="380" layoutY="325"
+                  prefWidth="150"/>
+
+
+        <Button text="Add User"
+                layoutX="120" layoutY="380"
+                prefWidth="100"
+                onAction="#handleAddUser"/>
+
+        <Button text="Edit User"
+                layoutX="250" layoutY="380"
+                prefWidth="100"
+                onAction="#handleEditUser"/>
+
+        <Button text="Delete User"
+                layoutX="380" layoutY="380"
+                prefWidth="110"
+                onAction="#handleDeleteUser"/>
+
+    </children>
+
+</AnchorPane>
