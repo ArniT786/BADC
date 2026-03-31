@@ -6,9 +6,9 @@ import java.util.List;
 
 public class FileService {
 
-    static final String DATA_DIR = "data/";
+    public static final String DATA_DIR = "data/";
 
-    static void ensureDataDir() {
+    public static void ensureDataDir() {
         new File(DATA_DIR).mkdirs();
     }
 

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+
+<AnchorPane prefHeight="500.0" prefWidth="600.0" 
+            xmlns="http://javafx.com/javafx" 
+            xmlns:fx="http://javafx.com/fxml" 
+            fx:controller="com.example.badc.Mithila.ReportOfficerDashboardController"
+            style="-fx-background-color: #fce4ec;">
+   <children>
+      <Label fx:id="title_lbl" layoutX="185.0" layoutY="30.0" text="Report Officer Dashboard" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+      <Label fx:id="welcome_lbl" layoutX="210.0" layoutY="70.0" text="Welcome, Report Officer" style="-fx-font-size: 16px;" />
+      
+      <Button fx:id="fsum_btn" layoutX="150.0" layoutY="120.0" prefWidth="300" onAction="#openFarmerSummary" text="Farmer Summary Report" />
+      <Button fx:id="prod_btn" layoutX="150.0" layoutY="160.0" prefWidth="300" onAction="#openProductionReport" text="Seasonal Production Report" />
+      <Button fx:id="trnd_btn" layoutX="150.0" layoutY="200.0" prefWidth="300" onAction="#openFertilizerTrends" text="Fertilizer Usage Trends" />
+      <Button fx:id="veri_btn" layoutX="150.0" layoutY="240.0" prefWidth="300" onAction="#openVerifyActivities" text="Verify Field Officer Activities" />
+      <Button fx:id="moni_btn" layoutX="150.0" layoutY="280.0" prefWidth="300" onAction="#openMonitorIssues" text="Monitor Agricultural Issues" />
+      <Button fx:id="shq_btn" layoutX="150.0" layoutY="320.0" prefWidth="300" onAction="#openSubmitHQ" text="Submit Report to HQ" />
+      
+      <Button fx:id="exit_btn" layoutX="150.0" layoutY="380.0" prefWidth="300" onAction="#handleLogout" text="Logout" style="-fx-background-color: #ffcdd2;" />
+   </children>
+</AnchorPane>
