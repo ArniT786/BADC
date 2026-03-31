@@ -27,36 +27,36 @@ public class ReportOfficerDashboardController implements Initializable {
 
     @FXML
     private void openFarmerSummary(ActionEvent event) {
-        SceneSwitcher.switchScene(event, "/com/example/badc/Mithila/farmer_summary.fxml");
+        SceneSwitcher.switchScene(event, "/Mithila/farmer_summary.fxml");
     }
 
     @FXML
     private void openProductionReport(ActionEvent event) {
-        SceneSwitcher.switchScene(event, "/com/example/badc/Mithila/production_report.fxml");
+        SceneSwitcher.switchScene(event, "/Mithila/production_report.fxml");
     }
 
     @FXML
     private void openFertilizerTrends(ActionEvent event) {
-        SceneSwitcher.switchScene(event, "/com/example/badc/Mithila/fertilizer_trends.fxml");
+        SceneSwitcher.switchScene(event, "/Mithila/fertilizer_trends.fxml");
     }
 
     @FXML
     private void openVerifyActivities(ActionEvent event) {
-        SceneSwitcher.switchScene(event, "/com/example/badc/Mithila/verify_activities.fxml");
+        SceneSwitcher.switchScene(event, "/Mithila/verify_activities.fxml");
     }
 
     @FXML
     private void openMonitorIssues(ActionEvent event) {
-        SceneSwitcher.switchScene(event, "/com/example/badc/Mithila/monitor_issues.fxml");
+        SceneSwitcher.switchScene(event, "/Mithila/monitor_issues.fxml");
     }
 
     @FXML
     private void openSubmitHQ(ActionEvent event) {
-        SceneSwitcher.switchScene(event, "/com/example/badc/Mithila/submit_hq.fxml");
+        SceneSwitcher.switchScene(event, "/Mithila/submit_hq.fxml");
     }
 
     @FXML
     private void handleLogout(ActionEvent event) {
-        SceneSwitcher.switchScene(event, "/com/example/badc/Mithila/mithila_login.fxml");
+        SceneSwitcher.switchScene(event, "/Mithila/login.fxml");
     }
 }

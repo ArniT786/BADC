@@ -5,18 +5,13 @@ import com.example.badc.service.TaskService;
 import com.example.badc.service.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import com.example.badc.SceneSwitcher;
 
 public class LoginController implements Initializable {
 
@@ -29,8 +24,7 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        UserService.initDummyUsers();
-        TaskService.initDummyTasks();
+        // init is already handled in HelloApplication.start()
     }
 
     @FXML
@@ -55,16 +49,16 @@ public class LoginController implements Initializable {
 
         String fxmlPath;
         if (user.getRole().equals("FIELD_OFFICER")) {
-            fxmlPath = "/com/example/badc/Mithila/field_officer_dashboard.fxml";
+            fxmlPath = "/Mithila/field_officer_dashboard.fxml";
         } else {
-            fxmlPath = "/com/example/badc/Mithila/report_officer_dashboard.fxml";
+            fxmlPath = "/Mithila/report_officer_dashboard.fxml";
         }
-        com.example.badc.SceneSwitcher.switchScene(e, fxmlPath);
+        SceneSwitcher.switchScene(e, fxmlPath);
     }
 
     @FXML
     private void goToSignup(ActionEvent e) {
-        com.example.badc.SceneSwitcher.switchScene(e, "/com/example/badc/Mithila/mithila_signup.fxml");
+        SceneSwitcher.switchScene(e, "/Mithila/signup.fxml");
     }
 
 }

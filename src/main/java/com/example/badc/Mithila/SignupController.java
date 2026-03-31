@@ -82,6 +82,6 @@ public class SignupController implements Initializable {
 
     @FXML
     private void goBack(ActionEvent e) {
-        SceneSwitcher.switchScene(e, "/com/example/badc/Mithila/mithila_login.fxml");
+        SceneSwitcher.switchScene(e, "/Mithila/login.fxml");
     }
 }
