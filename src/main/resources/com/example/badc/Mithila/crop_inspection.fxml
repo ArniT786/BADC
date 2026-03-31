@@ -1,55 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Button?>
 
-<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.badc.Mithila.CropInspectionController">
-   <VBox spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <padding>
-         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-      </padding>
-      <Label text="Crop Inspection Form" />
-      <Separator />
-      <GridPane hgap="8.0" vgap="12.0">
-        <columnConstraints>
-          <ColumnConstraints prefWidth="100.0" />
-          <ColumnConstraints prefWidth="400.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints vgrow="SOMETIMES" />
-          <RowConstraints vgrow="SOMETIMES" />
-          <RowConstraints vgrow="SOMETIMES" />
-          <RowConstraints vgrow="SOMETIMES" />
-        </rowConstraints>
-        <Label text="Farmer NID" />
-        <TextField fx:id="farmerNid" prefWidth="200.0" GridPane.columnIndex="1" />
-        <Label text="Crop" GridPane.rowIndex="1" />
-        <ComboBox fx:id="cropDrop" prefWidth="180.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <Label text="Date" GridPane.rowIndex="2" />
-        <TextField fx:id="dateField" prefWidth="180.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-        <Label text="Growth Stage" GridPane.rowIndex="3" />
-        <ComboBox fx:id="stageDrop" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      </GridPane>
-      <Label text="Condition / Pest Notes :" />
-      <TextArea fx:id="conditionArea" prefHeight="90.0" prefWidth="530.0" wrapText="true" />
-      <Separator />
-      <HBox spacing="8.0">
-         <Button onAction="#saveInspection" text="Save" />
-         <Button onAction="#clearForm" text="Clear" />
-         <Button onAction="#goBack" text="Back" />
-      </HBox>
-      <Label fx:id="msgLabel" text="" />
-   </VBox>
+<AnchorPane prefHeight="500.0" prefWidth="600.0" 
+            xmlns="http://javafx.com/javafx" 
+            xmlns:fx="http://javafx.com/fxml" 
+            fx:controller="com.example.badc.Mithila.CropInspectionController"
+            style="-fx-background-color: #f1f8e9;">
+   <children>
+      <Label fx:id="title_lbl" layoutX="210.0" layoutY="30.0" text="Crop Inspection Form" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+      
+      <Label fx:id="nid_lbl" layoutX="100.0" layoutY="85.0" text="Farmer NID :" />
+      <TextField fx:id="nid_txt" layoutX="220.0" layoutY="81.0" prefWidth="250.0" />
+      
+      <Label fx:id="crop_lbl" layoutX="100.0" layoutY="130.0" text="Crop Type :" />
+      <ComboBox fx:id="crop_cb" layoutX="220.0" layoutY="126.0" prefWidth="250.0" />
+      
+      <Label fx:id="date_lbl" layoutX="100.0" layoutY="175.0" text="Inspection Date :" />
+      <DatePicker fx:id="date_dp" layoutX="220.0" layoutY="171.0" prefWidth="250.0" />
+      
+      <Label fx:id="stage_lbl" layoutX="100.0" layoutY="220.0" text="Growth Stage :" />
+      <ComboBox fx:id="stage_cb" layoutX="220.0" layoutY="216.0" prefWidth="250.0" />
+      
+      <Label fx:id="cond_lbl" layoutX="100.0" layoutY="265.0" text="Condition Notes :" />
+      <TextField fx:id="cond_txt" layoutX="220.0" layoutY="261.0" prefWidth="250.0" />
+      
+      <Button fx:id="save_btn" layoutX="220.0" layoutY="320.0" onAction="#saveInspection" prefWidth="80.0" text="Save" />
+      <Button fx:id="clr_btn" layoutX="310.0" layoutY="320.0" onAction="#clearForm" prefWidth="80.0" text="Clear" />
+      <Button fx:id="back_btn" layoutX="400.0" layoutY="320.0" onAction="#goBack" prefWidth="80.0" text="Back" />
+      
+      <Label fx:id="msg_lbl" layoutX="100.0" layoutY="380.0" text="" />
+   </children>
 </AnchorPane>
-

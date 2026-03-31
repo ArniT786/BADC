@@ -1,38 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.Button?>
 
-<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.badc.Mithila.MonitorIssuesController">
-   <VBox spacing="8.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <padding>
-         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-      </padding>
-      <Label text="Agricultural Issue Monitor" />
-      <Separator />
-      <HBox spacing="10.0">
-         <Button onAction="#loadIssues" text="Load All Issues" />
-         <Button onAction="#goBack" text="Back" />
-      </HBox>
-      <Separator />
-      <TableView fx:id="issueTable" prefHeight="240.0" prefWidth="540.0">
-        <TableColumn fx:id="colId" prefWidth="90.0" text="Issue ID" />
-        <TableColumn fx:id="colLocation" prefWidth="140.0" text="Location" />
-        <TableColumn fx:id="colDesc" prefWidth="180.0" text="Description" />
-        <TableColumn fx:id="colPriority" prefWidth="100.0" text="Priority" />
+<AnchorPane prefHeight="500.0" prefWidth="600.0" 
+            xmlns="http://javafx.com/javafx" 
+            xmlns:fx="http://javafx.com/fxml" 
+            fx:controller="com.example.badc.Mithila.MonitorIssuesController"
+            style="-fx-background-color: #f1f8e9;">
+   <children>
+      <Label fx:id="title_lbl" layoutX="190.0" layoutY="30.0" text="Agricultural Issue Monitor" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+      
+      <Button fx:id="load_btn" layoutX="50.0" layoutY="80.0" onAction="#loadIssues" text="Load All Issues" />
+      <Button fx:id="back_btn" layoutX="170.0" layoutY="80.0" onAction="#goBack" text="Back" />
+      
+      <TableView fx:id="issue_tbl" layoutX="50.0" layoutY="125.0" prefHeight="230.0" prefWidth="500.0">
+        <columns>
+          <TableColumn fx:id="id_col" prefWidth="90.0" text="Issue ID" />
+          <TableColumn fx:id="loc_col" prefWidth="120.0" text="Location" />
+          <TableColumn fx:id="desc_col" prefWidth="180.0" text="Description" />
+          <TableColumn fx:id="prio_col" prefWidth="100.0" text="Priority" />
+        </columns>
       </TableView>
-      <Separator />
-      <Label text="Issue Detail :" />
-      <TextArea fx:id="detailArea" prefHeight="80.0" prefWidth="530.0" wrapText="true" />
-      <Label fx:id="msgLabel" text="" />
-   </VBox>
+      
+      <Label fx:id="det_lbl" layoutX="50.0" layoutY="370.0" text="Issue Detail :" />
+      <TextField fx:id="det_txt" layoutX="50.0" layoutY="395.0" prefWidth="500.0" prefHeight="60.0" />
+      
+      <Label fx:id="msg_lbl" layoutX="50.0" layoutY="465.0" text="" />
+   </children>
 </AnchorPane>
-

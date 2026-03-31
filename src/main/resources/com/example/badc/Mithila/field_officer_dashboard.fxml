@@ -1,30 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
 
-<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.badc.Mithila.FieldOfficerDashboardController">
-   <VBox spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <padding>
-         <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
-      </padding>
-      <Label text="Field Officer Panel" />
-      <Separator />
-      <Label text="Hello, Officer" />
-      <Separator />
-      <Button fx:id="btn1" maxWidth="Infinity" onAction="#openRegisterFarmer" text="Register New Farmer" />
-      <Button fx:id="btn2" maxWidth="Infinity" onAction="#openCropInspection" text="Crop Inspection" />
-      <Button fx:id="btn3" maxWidth="Infinity" onAction="#openDistribute" text="Distribute Seeds and Fertilizer" />
-      <Button fx:id="btn4" maxWidth="Infinity" onAction="#openLogVisit" text="Log Farmer Visit" />
-      <Button fx:id="btn5" maxWidth="Infinity" onAction="#openCropYield" text="Crop Yield Update" />
-      <Button fx:id="btn6" maxWidth="Infinity" onAction="#openDailyReport" text="Daily Report" />
-      <Button fx:id="btn7" maxWidth="Infinity" onAction="#openViewTasks" text="My Tasks" />
-      <Separator />
-      <Button maxWidth="Infinity" onAction="#handleLogout" text="Logout" />
-   </VBox>
+<AnchorPane prefHeight="500.0" prefWidth="600.0" 
+            xmlns="http://javafx.com/javafx" 
+            xmlns:fx="http://javafx.com/fxml" 
+            fx:controller="com.example.badc.Mithila.FieldOfficerDashboardController"
+            style="-fx-background-color: #e3f2fd;">
+   <children>
+      <Label fx:id="title_lbl" layoutX="190.0" layoutY="30.0" text="Field Officer Dashboard" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+      <Label fx:id="welcome_lbl" layoutX="220.0" layoutY="70.0" text="Welcome, Officer" style="-fx-font-size: 16px;" />
+      
+      <Button fx:id="reg_btn" layoutX="150.0" layoutY="120.0" prefWidth="300" onAction="#openRegisterFarmer" text="Register New Farmer" />
+      <Button fx:id="ins_btn" layoutX="150.0" layoutY="160.0" prefWidth="300" onAction="#openCropInspection" text="Crop Inspection" />
+      <Button fx:id="dis_btn" layoutX="150.0" layoutY="200.0" prefWidth="300" onAction="#openDistribute" text="Distribute Assets" />
+      <Button fx:id="log_btn" layoutX="150.0" layoutY="240.0" prefWidth="300" onAction="#openLogVisit" text="Log Farmer Visit" />
+      <Button fx:id="yiel_btn" layoutX="150.0" layoutY="280.0" prefWidth="300" onAction="#openCropYield" text="Crop Yield Update" />
+      <Button fx:id="repo_btn" layoutX="150.0" layoutY="320.0" prefWidth="300" onAction="#openDailyReport" text="Daily Report" />
+      <Button fx:id="task_btn" layoutX="150.0" layoutY="360.0" prefWidth="300" onAction="#openViewTasks" text="My Tasks" />
+      
+      <Button fx:id="exit_btn" layoutX="150.0" layoutY="420.0" prefWidth="300" onAction="#handleLogout" text="Logout" style="-fx-background-color: #ffcdd2;" />
+   </children>
 </AnchorPane>
-

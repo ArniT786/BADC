@@ -8,98 +8,78 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
-
 import com.example.badc.SceneSwitcher;
 
 public class DistributeInputController implements Initializable {
 
-    @FXML
-    private TextField farmerNid;
-    @FXML
-    private ComboBox<String> itemTypeDrop;
-    @FXML
-    private ComboBox<String> itemNameDrop;
-    @FXML
-    private TextField qtyField;
-    @FXML
-    private Label eligibilityLabel;
-    @FXML
-    private Label msgLabel;
+    @FXML private TextField nid_txt;
+    @FXML private ComboBox<String> type_cb;
+    @FXML private ComboBox<String> name_cb;
+    @FXML private TextField qty_txt;
+    @FXML private Label elig_lbl;
+    @FXML private Label msg_lbl;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        itemTypeDrop.getItems().addAll("Seeds", "Fertilizer");
-        itemTypeDrop.setOnAction(e -> {
-            String selected = itemTypeDrop.getValue();
+        type_cb.getItems().addAll("Seeds", "Fertilizer");
+        type_cb.setOnAction(e -> {
+            String selected = type_cb.getValue();
             if ("Seeds".equals(selected)) {
-                itemNameDrop.getItems().setAll("Rice Seed", "Wheat Seed", "Jute Seed");
+                name_cb.getItems().setAll("Rice Seed", "Wheat Seed", "Jute Seed");
             } else if ("Fertilizer".equals(selected)) {
-                itemNameDrop.getItems().setAll("Urea", "TSP", "MOP");
+                name_cb.getItems().setAll("Urea", "TSP", "MOP");
             }
-            itemNameDrop.setValue(null);
+            name_cb.setValue(null);
         });
     }
 
     @FXML
     private void checkEligibility(ActionEvent event) {
-        String nid = farmerNid.getText().trim();
+        String nid = nid_txt.getText().trim();
         if (nid.isEmpty()) {
-            eligibilityLabel.setText("Enter Farmer NID first");
+            elig_lbl.setText("Enter NID first");
             return;
         }
         boolean eligible = StockService.checkEligibility(nid);
-        eligibilityLabel.setText(eligible
-                ? "Farmer is eligible for distribution"
-                : "Farmer not found. Not eligible.");
+        elig_lbl.setText(eligible ? "Eligible" : "Not Eligible");
     }
 
     @FXML
     private void confirmDistribution(ActionEvent event) {
-        String eligText = eligibilityLabel.getText();
-        if (!eligText.contains("eligible")) {
-            msgLabel.setText("Check eligibility first");
+        if (!elig_lbl.getText().equals("Eligible")) {
+            msg_lbl.setText("Check eligibility first");
             return;
         }
 
-        String itemType = itemTypeDrop.getValue();
-        String itemName = itemNameDrop.getValue();
-        if (itemType == null || itemName == null) {
-            msgLabel.setText("Select item type and name");
-            return;
-        }
+        String type = type_cb.getValue();
+        String name = name_cb.getValue();
+        String qtyStr = qty_txt.getText().trim();
 
-        String qtyText = qtyField.getText().trim();
-        if (qtyText.isEmpty()) {
-            msgLabel.setText("Quantity is required");
+        if (type == null || name == null || qtyStr.isEmpty()) {
+            msg_lbl.setText("Please fill all fields");
             return;
         }
 
         double qty;
         try {
-            qty = Double.parseDouble(qtyText);
+            qty = Double.parseDouble(qtyStr);
         } catch (NumberFormatException ex) {
-            msgLabel.setText("Quantity must be a number");
+            msg_lbl.setText("Invalid quantity");
             return;
         }
 
-        if (qty <= 0) {
-            msgLabel.setText("Quantity must be greater than zero");
-            return;
-        }
-
-        String nid = farmerNid.getText().trim();
+        String nid = nid_txt.getText().trim();
         String today = LocalDate.now().toString();
-        StockRecord r = new StockRecord("", nid, itemType, itemName, qty, today, "OFFICER", true);
+        StockRecord r = new StockRecord("", nid, type, name, qty, today, "OFFICER", true);
 
         if (StockService.distributeItem(r)) {
-            msgLabel.setText("Distribution recorded successfully");
+            msg_lbl.setText("Success! Distribution saved.");
             clearForm();
         } else {
-            msgLabel.setText("Distribution failed");
+            msg_lbl.setText("Failed.");
         }
     }
 
@@ -109,13 +89,13 @@ public class DistributeInputController implements Initializable {
     }
 
     private void clearForm() {
-        farmerNid.clear();
-        itemTypeDrop.setValue(null);
-        itemNameDrop.setValue(null);
-        itemNameDrop.getItems().clear();
-        qtyField.clear();
-        eligibilityLabel.setText("");
-        msgLabel.setText("");
+        nid_txt.clear();
+        type_cb.setValue(null);
+        name_cb.setValue(null);
+        name_cb.getItems().clear();
+        qty_txt.clear();
+        elig_lbl.setText("");
+        msg_lbl.setText("");
     }
 
     @FXML

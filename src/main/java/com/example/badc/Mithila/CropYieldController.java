@@ -10,97 +10,74 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
-
 import com.example.badc.SceneSwitcher;
 
 public class CropYieldController implements Initializable {
 
-    @FXML
-    private TextField nidField;
-    @FXML
-    private ComboBox<String> cropDrop;
-    @FXML
-    private ComboBox<String> seasonDrop;
-    @FXML
-    private TextField harvestWt;
-    @FXML
-    private Label verifyLabel;
-    @FXML
-    private Label msgLabel;
+    @FXML private TextField nid_txt;
+    @FXML private ComboBox<String> crop_cb;
+    @FXML private ComboBox<String> seas_cb;
+    @FXML private TextField harv_txt;
+    @FXML private Label veri_lbl;
+    @FXML private Label msg_lbl;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        cropDrop.getItems().addAll("Rice", "Wheat", "Jute", "Maize", "Potato");
-        seasonDrop.getItems().addAll("Rabi 2024", "Kharif 2024", "Rabi 2025", "Kharif 2025");
+        crop_cb.getItems().addAll("Rice", "Wheat", "Jute", "Maize", "Potato");
+        seas_cb.getItems().addAll("Rabi 2024", "Kharif 2024", "Rabi 2025", "Kharif 2025");
     }
 
     @FXML
     private void verifyFarmer(ActionEvent event) {
-        String nid = nidField.getText().trim();
+        String nid = nid_txt.getText().trim();
         if (nid.isEmpty()) {
-            verifyLabel.setText("Enter NID first");
+            veri_lbl.setText("Enter NID first");
             return;
         }
         Farmer f = FarmerService.findByNid(nid);
         if (f != null) {
-            verifyLabel.setText("Found: " + f.getName() + " | District: " + f.getDistrict());
+            veri_lbl.setText("Found: " + f.getName());
         } else {
-            verifyLabel.setText("Farmer not found");
+            veri_lbl.setText("Farmer not found");
         }
     }
 
     @FXML
     private void saveYieldData(ActionEvent event) {
-        String verifyText = verifyLabel.getText();
-        if (verifyText.contains("not found") || verifyText.isEmpty()) {
-            msgLabel.setText("Please verify farmer first");
+        if (!veri_lbl.getText().contains("Found")) {
+            msg_lbl.setText("Please verify farmer first");
             return;
         }
 
-        String crop = cropDrop.getValue();
-        if (crop == null) {
-            msgLabel.setText("Select crop type");
-            return;
-        }
+        String crop = crop_cb.getValue();
+        String season = seas_cb.getValue();
+        String wtStr = harv_txt.getText().trim();
 
-        String season = seasonDrop.getValue();
-        if (season == null) {
-            msgLabel.setText("Select season");
-            return;
-        }
-
-        String wtText = harvestWt.getText().trim();
-        if (wtText.isEmpty()) {
-            msgLabel.setText("Harvest weight is required");
+        if (crop == null || season == null || wtStr.isEmpty()) {
+            msg_lbl.setText("Please fill all fields");
             return;
         }
 
         double weight;
         try {
-            weight = Double.parseDouble(wtText);
+            weight = Double.parseDouble(wtStr);
         } catch (NumberFormatException ex) {
-            msgLabel.setText("Harvest weight must be a number");
+            msg_lbl.setText("Invalid weight");
             return;
         }
 
-        if (weight <= 0) {
-            msgLabel.setText("Weight must be greater than zero");
-            return;
-        }
-
-        String nid = nidField.getText().trim();
+        String nid = nid_txt.getText().trim();
         String today = LocalDate.now().toString();
         ProductionRecord p = new ProductionRecord("", nid, crop, season, today, "OFFICER", weight);
 
         if (ProductionService.saveProduction(p)) {
-            msgLabel.setText("Yield data saved successfully");
+            msg_lbl.setText("Success! Yield saved.");
             clearForm();
         } else {
-            msgLabel.setText("Failed to save yield data");
+            msg_lbl.setText("Failed.");
         }
     }
 
@@ -110,12 +87,12 @@ public class CropYieldController implements Initializable {
     }
 
     private void clearForm() {
-        nidField.clear();
-        cropDrop.setValue(null);
-        seasonDrop.setValue(null);
-        harvestWt.clear();
-        verifyLabel.setText("");
-        msgLabel.setText("");
+        nid_txt.clear();
+        crop_cb.setValue(null);
+        seas_cb.setValue(null);
+        harv_txt.clear();
+        veri_lbl.setText("");
+        msg_lbl.setText("");
     }
 
     @FXML

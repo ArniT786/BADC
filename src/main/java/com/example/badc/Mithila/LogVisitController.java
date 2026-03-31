@@ -6,67 +6,50 @@ import com.example.badc.service.VisitService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
-
 import com.example.badc.SceneSwitcher;
 
 public class LogVisitController implements Initializable {
 
-    @FXML
-    private TextField nidField;
-    @FXML
-    private TextField visitDate;
-    @FXML
-    private TextArea adviceArea;
-    @FXML
-    private TextArea notesArea;
-    @FXML
-    private Label msgLabel;
+    @FXML private TextField nid_txt;
+    @FXML private DatePicker date_dp;
+    @FXML private TextField advice_txt;
+    @FXML private TextField notes_txt;
+    @FXML private Label msg_lbl;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // No special initialization needed
+        date_dp.setValue(LocalDate.now());
     }
 
     @FXML
     private void saveVisitLog(ActionEvent event) {
-        String nid = nidField.getText().trim();
-        String date = visitDate.getText().trim();
-        String advice = adviceArea.getText().trim();
-        String notes = notesArea.getText().trim();
+        String nid = nid_txt.getText().trim();
+        LocalDate dateValue = date_dp.getValue();
+        String advice = advice_txt.getText().trim();
+        String notes = notes_txt.getText().trim();
 
-        if (nid.isEmpty()) {
-            msgLabel.setText("Farmer NID is required");
+        if (nid.isEmpty() || dateValue == null || advice.isEmpty() || notes.isEmpty()) {
+            msg_lbl.setText("Please fill all fields");
             return;
         }
+
         if (!FarmerService.farmerExists(nid)) {
-            msgLabel.setText("Farmer not found in system");
-            return;
-        }
-        if (date.isEmpty()) {
-            msgLabel.setText("Visit date is required");
-            return;
-        }
-        if (advice.isEmpty() || advice.length() < 10) {
-            msgLabel.setText("Advice must be at least 10 characters");
-            return;
-        }
-        if (notes.isEmpty()) {
-            msgLabel.setText("Notes are required");
+            msg_lbl.setText("Farmer not found");
             return;
         }
 
-        VisitLog v = new VisitLog("", nid, date, advice, notes, "OFFICER");
+        VisitLog v = new VisitLog("", nid, dateValue.toString(), advice, notes, "OFFICER");
         if (VisitService.saveVisit(v)) {
-            msgLabel.setText("Visit log saved successfully");
+            msg_lbl.setText("Success! Visit saved.");
             clearForm();
         } else {
-            msgLabel.setText("Failed to save visit log");
+            msg_lbl.setText("Failed to save.");
         }
     }
 
@@ -76,11 +59,11 @@ public class LogVisitController implements Initializable {
     }
 
     private void clearForm() {
-        nidField.clear();
-        visitDate.clear();
-        adviceArea.clear();
-        notesArea.clear();
-        msgLabel.setText("");
+        nid_txt.clear();
+        date_dp.setValue(LocalDate.now());
+        advice_txt.clear();
+        notes_txt.clear();
+        msg_lbl.setText("");
     }
 
     @FXML

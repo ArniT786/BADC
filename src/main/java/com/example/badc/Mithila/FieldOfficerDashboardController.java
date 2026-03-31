@@ -4,32 +4,26 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-
+import javafx.scene.control.Label;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import com.example.badc.SceneSwitcher;
 
 public class FieldOfficerDashboardController implements Initializable {
 
-    @FXML
-    private Button btn1;
-    @FXML
-    private Button btn2;
-    @FXML
-    private Button btn3;
-    @FXML
-    private Button btn4;
-    @FXML
-    private Button btn5;
-    @FXML
-    private Button btn6;
-    @FXML
-    private Button btn7;
+    @FXML private Label title_lbl;
+    @FXML private Label welcome_lbl;
+    @FXML private Button reg_btn;
+    @FXML private Button ins_btn;
+    @FXML private Button dis_btn;
+    @FXML private Button log_btn;
+    @FXML private Button yiel_btn;
+    @FXML private Button repo_btn;
+    @FXML private Button task_btn;
+    @FXML private Button exit_btn;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
     }
 
     @FXML
@@ -69,6 +63,6 @@ public class FieldOfficerDashboardController implements Initializable {
 
     @FXML
     private void handleLogout(ActionEvent event) {
-        SceneSwitcher.switchScene(event, "/com/example/badc/login.fxml");
+        SceneSwitcher.switchScene(event, "/com/example/badc/Mithila/mithila_login.fxml");
     }
 }

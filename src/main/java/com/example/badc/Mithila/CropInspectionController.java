@@ -7,75 +7,54 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
-
 import com.example.badc.SceneSwitcher;
 
 public class CropInspectionController implements Initializable {
 
-    @FXML
-    private TextField farmerNid;
-    @FXML
-    private ComboBox<String> cropDrop;
-    @FXML
-    private TextField dateField;
-    @FXML
-    private ComboBox<String> stageDrop;
-    @FXML
-    private TextArea conditionArea;
-    @FXML
-    private Label msgLabel;
+    @FXML private TextField nid_txt;
+    @FXML private ComboBox<String> crop_cb;
+    @FXML private DatePicker date_dp;
+    @FXML private ComboBox<String> stage_cb;
+    @FXML private TextField cond_txt;
+    @FXML private Label msg_lbl;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        cropDrop.getItems().addAll("Rice", "Wheat", "Jute", "Maize", "Potato");
-        stageDrop.getItems().addAll("Seedling", "Vegetative", "Flowering", "Harvesting");
+        crop_cb.getItems().addAll("Rice", "Wheat", "Jute", "Maize", "Potato");
+        stage_cb.getItems().addAll("Seedling", "Vegetative", "Flowering", "Harvesting");
+        date_dp.setValue(LocalDate.now());
     }
 
     @FXML
     private void saveInspection(ActionEvent event) {
-        String nid = farmerNid.getText().trim();
-        String crop = cropDrop.getValue();
-        String date = dateField.getText().trim();
-        String stage = stageDrop.getValue();
-        String condition = conditionArea.getText().trim();
+        String nid = nid_txt.getText().trim();
+        String crop = crop_cb.getValue();
+        LocalDate dateValue = date_dp.getValue();
+        String stage = stage_cb.getValue();
+        String condition = cond_txt.getText().trim();
 
-        if (nid.isEmpty()) {
-            msgLabel.setText("Farmer NID is required");
+        if (nid.isEmpty() || crop == null || dateValue == null || stage == null || condition.isEmpty()) {
+            msg_lbl.setText("Please fill all fields");
             return;
         }
+
         if (!FarmerService.farmerExists(nid)) {
-            msgLabel.setText("Farmer not found in system");
-            return;
-        }
-        if (crop == null) {
-            msgLabel.setText("Please select crop type");
-            return;
-        }
-        if (date.isEmpty()) {
-            msgLabel.setText("Inspection date is required");
-            return;
-        }
-        if (stage == null) {
-            msgLabel.setText("Please select growth stage");
-            return;
-        }
-        if (condition.isEmpty()) {
-            msgLabel.setText("Condition details are required");
+            msg_lbl.setText("Farmer not found");
             return;
         }
 
-        Inspection i = new Inspection("", nid, crop, date, stage, condition, "OFFICER");
+        Inspection i = new Inspection("", nid, crop, dateValue.toString(), stage, condition, "OFFICER");
         if (InspectionService.saveInspection(i)) {
-            msgLabel.setText("Inspection saved successfully");
+            msg_lbl.setText("Success! Inspection saved.");
             clearForm();
         } else {
-            msgLabel.setText("Failed to save inspection");
+            msg_lbl.setText("Failed to save.");
         }
     }
 
@@ -85,12 +64,12 @@ public class CropInspectionController implements Initializable {
     }
 
     private void clearForm() {
-        farmerNid.clear();
-        cropDrop.setValue(null);
-        dateField.clear();
-        stageDrop.setValue(null);
-        conditionArea.clear();
-        msgLabel.setText("");
+        nid_txt.clear();
+        crop_cb.setValue(null);
+        date_dp.setValue(LocalDate.now());
+        stage_cb.setValue(null);
+        cond_txt.clear();
+        msg_lbl.setText("");
     }
 
     @FXML

@@ -1,119 +1,87 @@
 package com.example.badc.Mithila;
 
+import com.example.badc.model.User;
 import com.example.badc.model.FieldOfficer;
 import com.example.badc.model.ReportOfficer;
-import com.example.badc.model.User;
 import com.example.badc.service.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import com.example.badc.SceneSwitcher;
 
 public class SignupController implements Initializable {
 
-    @FXML private TextField nameField;
-    @FXML private TextField nidField;
-    @FXML private PasswordField passField;
-    @FXML private TextField phoneField;
-    @FXML private ComboBox<String> roleDrop;
-    @FXML private TextField districtField;
-    @FXML private TextField deptField;
-    @FXML private Label msgLabel;
+    @FXML private TextField name_txt;
+    @FXML private TextField nid_txt;
+    @FXML private PasswordField pass_pf;
+    @FXML private TextField phone_txt;
+    @FXML private ComboBox<String> role_cb;
+    @FXML private TextField district_txt;
+    @FXML private TextField dept_txt;
+    @FXML private Label msg_lbl;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        roleDrop.getItems().addAll("FIELD_OFFICER", "REPORT_OFFICER");
+        role_cb.getItems().addAll("FIELD_OFFICER", "REPORT_OFFICER");
     }
 
     @FXML
     private void handleSignup(ActionEvent e) {
-        String name = nameField.getText().trim();
-        String nid = nidField.getText().trim();
-        String pass = passField.getText().trim();
-        String phone = phoneField.getText().trim();
-        String role = roleDrop.getValue();
+        String name = name_txt.getText().trim();
+        String nid = nid_txt.getText().trim();
+        String password = pass_pf.getText().trim();
+        String phone = phone_txt.getText().trim();
+        String role = role_cb.getValue();
+        String district = district_txt.getText().trim();
+        String department = dept_txt.getText().trim();
 
-        if (name.isEmpty()) {
-            msgLabel.setText("Name is required");
-            return;
-        }
-        if (!nid.matches("\\d{10}")) {
-            msgLabel.setText("NID must be exactly 10 digits");
-            return;
-        }
-        if (pass.length() < 6) {
-            msgLabel.setText("Password must be at least 6 characters");
-            return;
-        }
-        if (phone.isEmpty()) {
-            msgLabel.setText("Phone is required");
-            return;
-        }
-        if (role == null) {
-            msgLabel.setText("Please select a role");
-            return;
-        }
-        if (UserService.nidExists(nid)) {
-            msgLabel.setText("This NID is already registered");
+        if (name.isEmpty() || nid.isEmpty() || password.isEmpty() || phone.isEmpty() || role == null) {
+            msg_lbl.setText("Basic fields are required");
             return;
         }
 
         String userId = (role.equals("FIELD_OFFICER") ? "FO" : "RO") + System.currentTimeMillis();
-        User user;
-
+        User newUser;
         if (role.equals("FIELD_OFFICER")) {
-            String district = districtField.getText().trim();
             if (district.isEmpty()) {
-                msgLabel.setText("District is required");
+                msg_lbl.setText("District required for Field Officer");
                 return;
             }
-            user = new FieldOfficer(userId, name, nid, pass, phone, district, "SUP001");
+            newUser = new FieldOfficer(userId, name, nid, password, phone, district, "SUP001");
         } else {
-            String dept = deptField.getText().trim();
-            if (dept.isEmpty()) {
-                msgLabel.setText("Department is required");
+            if (department.isEmpty()) {
+                msg_lbl.setText("Department required for Report Officer");
                 return;
             }
-            user = new ReportOfficer(userId, name, nid, pass, phone, dept);
+            newUser = new ReportOfficer(userId, name, nid, password, phone, department);
         }
 
-        UserService.signup(user);
-        msgLabel.setText("Registration successful! Please login.");
-        clearFields();
+        if (UserService.signup(newUser)) {
+            msg_lbl.setText("Success! Please login.");
+            clearFields();
+        } else {
+            msg_lbl.setText("Failed! NID exists or invalid data.");
+        }
     }
 
     private void clearFields() {
-        nameField.clear();
-        nidField.clear();
-        passField.clear();
-        phoneField.clear();
-        roleDrop.setValue(null);
-        districtField.clear();
-        deptField.clear();
+        name_txt.clear();
+        nid_txt.clear();
+        pass_pf.clear();
+        phone_txt.clear();
+        role_cb.setValue(null);
+        district_txt.clear();
+        dept_txt.clear();
     }
 
     @FXML
     private void goBack(ActionEvent e) {
-        try {
-            Stage stage = (Stage) nameField.getScene().getWindow();
-            Parent root = FXMLLoader.load(
-                    getClass().getResource("/com/example/badc/Mithila/mithila_login.fxml"));
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException ex) {
-            msgLabel.setText("Error loading login page.");
-            ex.printStackTrace();
-        }
+        SceneSwitcher.switchScene(e, "/com/example/badc/Mithila/mithila_login.fxml");
     }
 }

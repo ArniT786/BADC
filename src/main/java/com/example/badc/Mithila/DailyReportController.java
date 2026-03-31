@@ -5,56 +5,43 @@ import com.example.badc.service.DailyLogService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
-
 import com.example.badc.SceneSwitcher;
 
 public class DailyReportController implements Initializable {
 
-    @FXML
-    private TextField officerNid;
-    @FXML
-    private TextField reportDate;
-    @FXML
-    private TextArea summaryArea;
-    @FXML
-    private Label msgLabel;
+    @FXML private TextField nid_txt;
+    @FXML private DatePicker date_dp;
+    @FXML private TextField summ_txt;
+    @FXML private Label msg_lbl;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // No special initialization needed
+        date_dp.setValue(LocalDate.now());
     }
 
     @FXML
     private void submitReport(ActionEvent event) {
-        String nid = officerNid.getText().trim();
-        String date = reportDate.getText().trim();
-        String summary = summaryArea.getText().trim();
+        String nid = nid_txt.getText().trim();
+        LocalDate dateValue = date_dp.getValue();
+        String summary = summ_txt.getText().trim();
 
-        if (nid.isEmpty()) {
-            msgLabel.setText("Officer NID is required");
-            return;
-        }
-        if (date.isEmpty()) {
-            msgLabel.setText("Report date is required");
-            return;
-        }
-        if (summary.isEmpty() || summary.length() < 20) {
-            msgLabel.setText("Summary must be at least 20 characters");
+        if (nid.isEmpty() || dateValue == null || summary.isEmpty()) {
+            msg_lbl.setText("Please fill all fields");
             return;
         }
 
-        DailyLog log = new DailyLog("", nid, date, summary);
+        DailyLog log = new DailyLog("", nid, dateValue.toString(), summary);
         if (DailyLogService.saveLog(log)) {
-            msgLabel.setText("Daily report submitted successfully");
+            msg_lbl.setText("Success! Report submitted.");
             clearForm();
         } else {
-            msgLabel.setText("Failed to submit report");
+            msg_lbl.setText("Failed to submit.");
         }
     }
 
@@ -64,10 +51,10 @@ public class DailyReportController implements Initializable {
     }
 
     private void clearForm() {
-        officerNid.clear();
-        reportDate.clear();
-        summaryArea.clear();
-        msgLabel.setText("");
+        nid_txt.clear();
+        date_dp.setValue(LocalDate.now());
+        summ_txt.clear();
+        msg_lbl.setText("");
     }
 
     @FXML

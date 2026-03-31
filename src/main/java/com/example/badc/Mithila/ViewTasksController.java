@@ -3,7 +3,6 @@ package com.example.badc.Mithila;
 import com.example.badc.model.Task;
 import com.example.badc.service.TaskService;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,73 +11,59 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import com.example.badc.SceneSwitcher;
 
 public class ViewTasksController implements Initializable {
 
-    @FXML
-    private TextField nidField;
-    @FXML
-    private TableView<Task> taskTable;
-    @FXML
-    private TableColumn<Task, String> colId;
-    @FXML
-    private TableColumn<Task, String> colDesc;
-    @FXML
-    private TableColumn<Task, String> colDue;
-    @FXML
-    private TableColumn<Task, String> colStat;
-    @FXML
-    private Label msgLabel;
+    @FXML private TextField nid_txt;
+    @FXML private TableView<Task> task_tbl;
+    @FXML private TableColumn<Task, String> id_col;
+    @FXML private TableColumn<Task, String> desc_col;
+    @FXML private TableColumn<Task, String> due_col;
+    @FXML private TableColumn<Task, String> stat_col;
+    @FXML private Label msg_lbl;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        colId.setCellValueFactory(new PropertyValueFactory<>("taskId"));
-        colDesc.setCellValueFactory(new PropertyValueFactory<>("description"));
-        colDue.setCellValueFactory(new PropertyValueFactory<>("deadline"));
-        colStat.setCellValueFactory(new PropertyValueFactory<>("status"));
+        id_col.setCellValueFactory(new PropertyValueFactory<>("taskId"));
+        desc_col.setCellValueFactory(new PropertyValueFactory<>("description"));
+        due_col.setCellValueFactory(new PropertyValueFactory<>("deadline"));
+        stat_col.setCellValueFactory(new PropertyValueFactory<>("status"));
     }
 
     @FXML
     private void loadTasks(ActionEvent event) {
-        String nid = nidField.getText().trim();
+        String nid = nid_txt.getText().trim();
         if (nid.isEmpty()) {
-            msgLabel.setText("Enter your NID first");
+            msg_lbl.setText("Enter NID first");
             return;
         }
         List<Task> tasks = TaskService.getByOfficerNid(nid);
         if (tasks.isEmpty()) {
-            msgLabel.setText("No tasks found for this NID");
-            taskTable.setItems(FXCollections.observableArrayList());
+            msg_lbl.setText("No tasks");
+            task_tbl.setItems(FXCollections.observableArrayList());
         } else {
-            taskTable.setItems(FXCollections.observableArrayList(tasks));
-            msgLabel.setText("Loaded " + tasks.size() + " task(s)");
+            task_tbl.setItems(FXCollections.observableArrayList(tasks));
+            msg_lbl.setText("Loaded " + tasks.size() + " tasks");
         }
     }
 
     @FXML
     private void acknowledgeTask(ActionEvent event) {
-        Task selected = taskTable.getSelectionModel().getSelectedItem();
+        Task selected = task_tbl.getSelectionModel().getSelectedItem();
         if (selected == null) {
-            msgLabel.setText("Please select a task first");
-            return;
-        }
-        if (selected.getStatus().equals("ACKNOWLEDGED")) {
-            msgLabel.setText("Task already acknowledged");
+            msg_lbl.setText("Select a task");
             return;
         }
         TaskService.acknowledgeTask(selected.getTaskId());
 
-        // Reload tasks
-        String nid = nidField.getText().trim();
+        String nid = nid_txt.getText().trim();
         List<Task> tasks = TaskService.getByOfficerNid(nid);
-        taskTable.setItems(FXCollections.observableArrayList(tasks));
-        msgLabel.setText("Task acknowledged successfully");
+        task_tbl.setItems(FXCollections.observableArrayList(tasks));
+        msg_lbl.setText("Acknowledged");
     }
 
     @FXML
