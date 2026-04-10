@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.badc.Meraj.FinanceOfficer.BudgetController"
+            prefHeight="500.0" prefWidth="800.0">
+
+    <children>
+
+
+        <Label text="Budget Management"
+               layoutX="300" layoutY="15"
+               style="-fx-font-size:20px; -fx-font-weight:bold;" />
+
+
+        <TableView fx:id="budgetTable"
+                   layoutX="40"
+                   layoutY="60"
+                   prefHeight="260"
+                   prefWidth="720">
+
+            <columns>
+                <TableColumn fx:id="colDept"
+                             text="Department"
+                             prefWidth="200"/>
+
+                <TableColumn fx:id="colAllocated"
+                             text="Allocated Budget"
+                             prefWidth="180"/>
+
+                <TableColumn fx:id="colUsed"
+                             text="Used Amount"
+                             prefWidth="160"/>
+
+                <TableColumn fx:id="colRemaining"
+                             text="Remaining"
+                             prefWidth="180"/>
+            </columns>
+
+        </TableView>
+
+
+        <Label text="New Allocation:"
+               layoutX="80"
+               layoutY="350"/>
+
+        <TextField fx:id="txtAllocation"
+                   layoutX="200"
+                   layoutY="345"
+                   prefWidth="180"/>
+
+
+        <Button text="Update Allocation"
+                layoutX="420"
+                layoutY="345"
+                prefWidth="160"
+                onAction="#handleUpdateAllocation"/>
+
+        <Button text="Refresh"
+                layoutX="600"
+                layoutY="345"
+                prefWidth="100"
+                onAction="#handleRefresh"/>
+
+
+        <Label fx:id="lblStatus"
+               layoutX="250"
+               layoutY="420"
+               style="-fx-text-fill:green; -fx-font-size:14px;"/>
+
+    </children>
+
+</AnchorPane>
+

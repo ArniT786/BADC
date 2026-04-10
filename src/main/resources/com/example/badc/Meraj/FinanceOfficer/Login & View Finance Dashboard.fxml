@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.badc.Meraj.FinanceOfficer.LoginFinanceDashboardController">
+    prefHeight="350.0" prefWidth="500.0">
+
+    <children>
+
+        <Label text="Finance System Login"
+               layoutX="150" layoutY="40"
+               style="-fx-font-size:20px; -fx-font-weight:bold;" />
+
+        <Label text="Username:"
+               layoutX="90" layoutY="120"/>
+
+        <TextField fx:id="txtUsername"
+                   layoutX="180" layoutY="115"
+                   prefWidth="180"/>
+
+        <Label text="Password:"
+               layoutX="90" layoutY="170"/>
+
+        <PasswordField fx:id="txtPassword"
+                       layoutX="180" layoutY="165"
+                       prefWidth="180"/>
+
+        <Button text="Login"
+                layoutX="200"
+                layoutY="220"
+                prefWidth="100"
+                onAction="#handleLogin"/>
+
+    </children>
+
+</AnchorPane>

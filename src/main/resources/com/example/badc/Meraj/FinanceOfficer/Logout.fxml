@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="400.0" prefWidth="650.0"
+            xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.badc.Meraj.FinanceOfficer.LogoutController">
+
+    <!-- ===== TOP TITLE ===== -->
+    <top>
+        <Label text="Logout"
+               style="-fx-font-size:20px; -fx-font-weight:bold;">
+            <BorderPane.margin>
+                <Insets top="12" right="12" bottom="12" left="12"/>
+            </BorderPane.margin>
+        </Label>
+    </top>
+
+    <!-- ===== CENTER AREA ===== -->
+    <center>
+        <VBox alignment="CENTER" spacing="20">
+
+            <padding>
+                <Insets top="40" right="40" bottom="40" left="40"/>
+            </padding>
+
+            <!-- Event 1 -->
+            <Label text="Do you want to logout from the system?"
+                   style="-fx-font-size:16px;" />
+
+            <!-- Buttons -->
+            <HBox alignment="CENTER" spacing="15">
+
+                <!-- Logout Button -->
+                <Button text="Logout"
+                        fx:id="logoutBtn"
+                        prefWidth="120"
+                        onAction="#handleLogout"/>
+
+                <!-- Cancel Button -->
+                <Button text="Cancel"
+                        fx:id="cancelBtn"
+                        prefWidth="120"
+                        onAction="#handleCancel"/>
+
+            </HBox>
+
+        </VBox>
+    </center>
+
+    <!-- ===== BOTTOM STATUS ===== -->
+    <bottom>
+        <VBox spacing="6">
+
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+
+            <!-- Event 7 -->
+            <Label text="System Message:"
+                   style="-fx-font-weight:bold;" />
+
+            <Label fx:id="messageLabel"
+                   text="Waiting for logout action..."
+                   style="-fx-text-fill:green;" />
+
+            <!-- Event 8 -->
+            <Label fx:id="sessionStatusLabel"
+                   text="Session active."
+                   style="-fx-text-fill:gray;" />
+
+        </VBox>
+    </bottom>
+
+</BorderPane>

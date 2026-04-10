@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane prefHeight="560.0" prefWidth="900.0"
+            xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.badc.Meraj.FinanceOfficer.ExpenseTrackingController">
+
+    <!-- ===== TOP TITLE ===== -->
+    <top>
+        <Label text="Expense Tracking"
+               style="-fx-font-size:20px; -fx-font-weight:bold; -fx-padding:12;" />
+    </top>
+
+    <!-- ===== CENTER CONTENT ===== -->
+    <center>
+        <VBox spacing="15" padding="15">
+
+            <!-- Event 1 + 2 : Expense Data -->
+            <TableView fx:id="expenseTable" prefHeight="260">
+
+                <columns>
+                    <TableColumn text="Expense ID" prefWidth="120"/>
+                    <TableColumn text="Category" prefWidth="150"/>
+                    <TableColumn text="Amount" prefWidth="120"/>
+                    <TableColumn text="Date" prefWidth="150"/>
+                    <TableColumn text="Description" prefWidth="250"/>
+                </columns>
+
+            </TableView>
+
+            <!-- Event 4 : Add/Edit Expense -->
+            <GridPane hgap="10" vgap="10">
+
+                <Label text="Category:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <TextField fx:id="categoryField"
+                           promptText="Expense category"
+                           GridPane.rowIndex="0"
+                           GridPane.columnIndex="1"/>
+
+                <Label text="Amount:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <TextField fx:id="amountField"
+                           promptText="Enter amount"
+                           GridPane.rowIndex="1"
+                           GridPane.columnIndex="1"/>
+
+                <Label text="Date:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <DatePicker fx:id="datePicker"
+                            GridPane.rowIndex="2"
+                            GridPane.columnIndex="1"/>
+
+                <Label text="Description:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                <TextArea fx:id="descriptionArea"
+                          prefRowCount="2"
+                          GridPane.rowIndex="3"
+                          GridPane.columnIndex="1"/>
+
+            </GridPane>
+
+            <!-- ACTION BUTTONS -->
+            <HBox spacing="10">
+
+                <!-- Event 2 -->
+                <Button text="Fetch Expenses"
+                        fx:id="fetchBtn"
+                        onAction="#handleFetchExpenses"/>
+
+                <!-- Event 3 -->
+                <Button text="Validate Records"
+                        fx:id="validateBtn"
+                        onAction="#handleValidateRecords"/>
+
+                <!-- Event 4 -->
+                <Button text="Add / Edit Expense"
+                        fx:id="editBtn"
+                        onAction="#handleEditExpense"/>
+
+                <!-- Event 5 -->
+                <Button text="Process Update"
+                        fx:id="processBtn"
+                        onAction="#handleProcessUpdate"/>
+
+                <!-- Event 6 -->
+                <Button text="Save Expense"
+                        fx:id="saveBtn"
+                        onAction="#handleSaveExpense"/>
+
+            </HBox>
+
+        </VBox>
+    </center>
+
+    <!-- ===== BOTTOM SUMMARY ===== -->
+    <bottom>
+        <VBox spacing="5" padding="10">
+
+            <!-- Event 7 -->
+            <Label text="Expense Summary:"
+                   style="-fx-font-weight:bold;"/>
+
+            <Label fx:id="summaryLabel"
+                   text="Total expenses will be shown here."/>
+
+            <!-- Event 8 -->
+            <Label fx:id="confirmationLabel"
+                   text="Confirmation message..."
+                   style="-fx-text-fill:green;"/>
+
+        </VBox>
+    </bottom>
+
+</BorderPane>
+

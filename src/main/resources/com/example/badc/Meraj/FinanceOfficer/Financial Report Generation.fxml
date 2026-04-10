@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane prefHeight="520.0" prefWidth="750.0"
+            xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.badc.Meraj.FinanceOfficer.FinancialReportController">
+
+    <!-- ===== TOP TITLE ===== -->
+    <top>
+        <Label text="Financial Report Generation"
+               style="-fx-font-size:20px; -fx-font-weight:bold; -fx-padding:12;" />
+    </top>
+
+    <!-- ===== CENTER FORM ===== -->
+    <center>
+        <VBox spacing="15" padding="15">
+
+            <GridPane hgap="12" vgap="12">
+
+                <!-- Event 1: Select report type -->
+                <Label text="Report Type:"
+                       GridPane.rowIndex="0"
+                       GridPane.columnIndex="0"/>
+
+                <ComboBox fx:id="reportTypeCombo"
+                          promptText="Select report type"
+                          GridPane.rowIndex="0"
+                          GridPane.columnIndex="1">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Monthly Report"/>
+                            <String fx:value="Quarterly Report"/>
+                            <String fx:value="Annual Report"/>
+                            <String fx:value="Subsidy Report"/>
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+
+                <!-- Event 3: Inputs -->
+                <Label text="Start Date:"
+                       GridPane.rowIndex="1"
+                       GridPane.columnIndex="0"/>
+
+                <DatePicker fx:id="startDatePicker"
+                            GridPane.rowIndex="1"
+                            GridPane.columnIndex="1"/>
+
+                <Label text="End Date:"
+                       GridPane.rowIndex="2"
+                       GridPane.columnIndex="0"/>
+
+                <DatePicker fx:id="endDatePicker"
+                            GridPane.rowIndex="2"
+                            GridPane.columnIndex="1"/>
+
+                <Label text="Remarks:"
+                       GridPane.rowIndex="3"
+                       GridPane.columnIndex="0"/>
+
+                <TextArea fx:id="remarksArea"
+                          prefRowCount="3"
+                          GridPane.rowIndex="3"
+                          GridPane.columnIndex="1"/>
+
+            </GridPane>
+
+            <!-- ===== ACTION BUTTONS ===== -->
+            <HBox spacing="10">
+
+                <!-- Event 2 -->
+                <Button text="Fetch Financial Data"
+                        fx:id="fetchDataBtn"
+                        onAction="#handleFetchData"/>
+
+                <!-- Event 4 + 5 -->
+                <Button text="Generate Report"
+                        fx:id="generateBtn"
+                        onAction="#handleGenerateReport"/>
+
+                <!-- Event 6 -->
+                <Button text="Save Report"
+                        fx:id="saveBtn"
+                        onAction="#handleSaveReport"/>
+
+                <!-- Event 7 -->
+                <Button text="Export File"
+                        fx:id="exportBtn"
+                        onAction="#handleExportReport"/>
+
+            </HBox>
+
+        </VBox>
+    </center>
+
+    <!-- ===== BOTTOM STATUS ===== -->
+    <bottom>
+        <VBox spacing="6" padding="10">
+
+            <!-- Event 8 -->
+            <Label text="Status:"
+                   style="-fx-font-weight:bold;"/>
+
+            <Label fx:id="confirmationLabel"
+                   text="Report confirmation message will appear here."
+                   style="-fx-text-fill:green;"/>
+
+        </VBox>
+    </bottom>
+
+</BorderPane>

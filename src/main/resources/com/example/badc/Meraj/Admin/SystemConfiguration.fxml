@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.badc.Meraj.Admin.SystemConfigurationController">
+
+    <!-- ===== TOP TITLE ===== -->
+    <top>
+        <Label text="System Configuration"
+               style="-fx-font-size:20px; -fx-font-weight:bold;">
+            <BorderPane.margin>
+                <Insets top="12" right="12" bottom="12" left="12"/>
+            </BorderPane.margin>
+        </Label>
+    </top>
+
+    <!-- ===== CENTER AREA ===== -->
+    <center>
+        <VBox spacing="15">
+
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+
+            <GridPane hgap="10" vgap="10">
+
+                <!-- System Name -->
+                <Label text="System Name:"
+                       GridPane.rowIndex="0"
+                       GridPane.columnIndex="0"/>
+
+                <TextField fx:id="systemNameField"
+                           promptText="Enter system name"
+                           GridPane.rowIndex="0"
+                           GridPane.columnIndex="1"/>
+
+                <!-- Maintenance Mode -->
+                <Label text="Maintenance Mode:"
+                       GridPane.rowIndex="1"
+                       GridPane.columnIndex="0"/>
+
+                <CheckBox fx:id="maintenanceCheckBox"
+                          text="Enable Maintenance"
+                          GridPane.rowIndex="1"
+                          GridPane.columnIndex="1"/>
+
+                <!-- Max Users -->
+                <Label text="Max Users:"
+                       GridPane.rowIndex="2"
+                       GridPane.columnIndex="0"/>
+
+                <TextField fx:id="maxUsersField"
+                           promptText="Enter max users"
+                           GridPane.rowIndex="2"
+                           GridPane.columnIndex="1"/>
+
+                <!-- Log Level -->
+                <Label text="Log Level:"
+                       GridPane.rowIndex="3"
+                       GridPane.columnIndex="0"/>
+
+                <ComboBox fx:id="logLevelCombo"
+                          promptText="Select log level"
+                          GridPane.rowIndex="3"
+                          GridPane.columnIndex="1">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="INFO"/>
+                            <String fx:value="WARNING"/>
+                            <String fx:value="ERROR"/>
+                            <String fx:value="DEBUG"/>
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+
+            </GridPane>
+
+            <!-- ===== BUTTONS ===== -->
+            <HBox spacing="10">
+
+                <Button text="Load Configuration"
+                        fx:id="loadConfigButton"/>
+
+                <Button text="Validate Admin"
+                        fx:id="validateAdminButton"/>
+
+                <Button text="Modify Settings"
+                        fx:id="modifyButton"/>
+
+                <Button text="Process Update"
+                        fx:id="processButton"/>
+
+                <Button text="Save Configuration"
+                        fx:id="saveButton"/>
+
+            </HBox>
+
+            <!-- Restart Service -->
+            <Button text="Restart Service"
+                    fx:id="restartButton"
+                    style="-fx-font-weight:bold;"/>
+
+        </VBox>
+    </center>
+
+    <!-- ===== BOTTOM STATUS ===== -->
+    <bottom>
+        <VBox spacing="5">
+
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+
+            <Label text="System Status:"
+                   style="-fx-font-weight:bold;"/>
+
+            <Label fx:id="statusLabel"
+                   text="Waiting for action..."
+                   style="-fx-text-fill:green;"/>
+
+        </VBox>
+    </bottom>
+
+</BorderPane>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.badc.Meraj.Admin.PendingRequestController"
+            prefHeight="450.0" prefWidth="700.0">
+
+    <children>
+
+
+        <Label text="Pending Requests"
+               layoutX="250" layoutY="15"
+               style="-fx-font-size:20px; -fx-font-weight:bold;" />
+
+
+        <TableView fx:id="requestTable"
+                   layoutX="40" layoutY="60"
+                   prefHeight="260"
+                   prefWidth="620">
+
+            <columns>
+                <TableColumn fx:id="colRequestId"
+                             text="Request ID"
+                             prefWidth="120"/>
+
+                <TableColumn fx:id="colUserName"
+                             text="User Name"
+                             prefWidth="200"/>
+
+                <TableColumn fx:id="colType"
+                             text="Request Type"
+                             prefWidth="150"/>
+
+                <TableColumn fx:id="colStatus"
+                             text="Status"
+                             prefWidth="150"/>
+            </columns>
+
+        </TableView>
+
+
+        <Label text="Details:"
+               layoutX="50" layoutY="335"/>
+
+        <TextArea fx:id="txtDetails"
+                  layoutX="110"
+                  layoutY="320"
+                  prefHeight="60"
+                  prefWidth="400"/>
+
+
+        <Button text="Approve"
+                layoutX="180"
+                layoutY="400"
+                prefWidth="110"
+                onAction="#handleApprove"/>
+
+        <Button text="Reject"
+                layoutX="330"
+                layoutY="400"
+                prefWidth="110"
+                onAction="#handleReject"/>
+
+    </children>
+
+</AnchorPane>

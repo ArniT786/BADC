@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane prefHeight="540.0" prefWidth="850.0"
+            xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.badc.Meraj.FinanceOfficer.AuditTransactionController">
+
+    <!-- ===== TOP TITLE ===== -->
+    <top>
+        <Label text="Audit &amp; Transaction Review"
+               style="-fx-font-size:20px; -fx-font-weight:bold; -fx-padding:12;" />
+    </top>
+
+    <!-- ===== CENTER CONTENT ===== -->
+    <center>
+        <VBox spacing="12" padding="15">
+
+            <!-- Event 1 + 2 : Audit Logs / Transactions -->
+            <TableView fx:id="transactionTable" prefHeight="300">
+
+                <columns>
+
+                    <TableColumn text="Transaction ID" prefWidth="140"/>
+                    <TableColumn text="Date" prefWidth="120"/>
+                    <TableColumn text="Amount" prefWidth="120"/>
+                    <TableColumn text="Status" prefWidth="120"/>
+                    <TableColumn text="Remarks" prefWidth="200"/>
+
+                </columns>
+
+            </TableView>
+
+            <!-- Event 5 : Flag Issues -->
+            <HBox spacing="10">
+
+                <Label text="Audit Remark:"/>
+
+                <TextField fx:id="remarkField"
+                           promptText="Write audit remark..."
+                           prefWidth="300"/>
+
+                <Button text="Flag Issue"
+                        fx:id="flagBtn"
+                        onAction="#handleFlagIssue"/>
+
+            </HBox>
+
+            <!-- Event Buttons -->
+            <HBox spacing="10">
+
+                <!-- Event 2 -->
+                <Button text="Fetch Transactions"
+                        fx:id="fetchBtn"
+                        onAction="#handleFetchTransactions"/>
+
+                <!-- Event 3 + 4 -->
+                <Button text="Review Entries"
+                        fx:id="reviewBtn"
+                        onAction="#handleReviewEntries"/>
+
+                <!-- Event 6 -->
+                <Button text="Save Remarks"
+                        fx:id="saveBtn"
+                        onAction="#handleSaveRemarks"/>
+
+                <!-- Event 7 -->
+                <Button text="Notify Admin"
+                        fx:id="notifyBtn"
+                        onAction="#handleNotifyAdmin"/>
+
+            </HBox>
+
+        </VBox>
+    </center>
+
+    <!-- ===== BOTTOM STATUS ===== -->
+    <bottom>
+        <VBox spacing="5" padding="10">
+
+            <!-- Event 8 -->
+            <Label text="Audit Status:"
+                   style="-fx-font-weight:bold;"/>
+
+            <Label fx:id="statusLabel"
+                   text="Audit log updates will appear here."
+                   style="-fx-text-fill:green;"/>
+
+        </VBox>
+    </bottom>
+
+</BorderPane>
+

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.badc.Meraj.Admin.ManageSubsidyPoliciesController">
+
+    <!-- ===== TOP TITLE ===== -->
+    <top>
+        <Label text="Manage Subsidy Policies"
+               style="-fx-font-size:20px; -fx-font-weight:bold;">
+            <BorderPane.margin>
+                <Insets top="12" right="12" bottom="12" left="12"/>
+            </BorderPane.margin>
+        </Label>
+    </top>
+
+    <!-- ===== CENTER FORM ===== -->
+    <center>
+        <VBox spacing="12">
+
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+
+            <GridPane hgap="10" vgap="10">
+
+                <!-- Policy Name -->
+                <Label text="Policy Name:"
+                       GridPane.rowIndex="0"
+                       GridPane.columnIndex="0"/>
+
+                <TextField fx:id="policyNameField"
+                           promptText="Enter policy name"
+                           GridPane.rowIndex="0"
+                           GridPane.columnIndex="1"/>
+
+                <!-- Subsidy Rate -->
+                <Label text="Subsidy Rate (%):"
+                       GridPane.rowIndex="1"
+                       GridPane.columnIndex="0"/>
+
+                <TextField fx:id="subsidyRateField"
+                           promptText="Enter percentage"
+                           GridPane.rowIndex="1"
+                           GridPane.columnIndex="1"/>
+
+                <!-- Eligibility -->
+                <Label text="Eligibility Criteria:"
+                       GridPane.rowIndex="2"
+                       GridPane.columnIndex="0"/>
+
+                <TextArea fx:id="eligibilityArea"
+                          prefRowCount="3"
+                          GridPane.rowIndex="2"
+                          GridPane.columnIndex="1"/>
+
+                <!-- Status -->
+                <Label text="Policy Status:"
+                       GridPane.rowIndex="3"
+                       GridPane.columnIndex="0"/>
+
+                <ComboBox fx:id="statusCombo"
+                          GridPane.rowIndex="3"
+                          GridPane.columnIndex="1">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Active"/>
+                            <String fx:value="Inactive"/>
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+
+            </GridPane>
+
+            <!-- ===== ACTION BUTTONS ===== -->
+            <HBox spacing="10">
+
+                <Button text="Load Policy Data"
+                        fx:id="loadButton"/>
+
+                <Button text="Update Policy"
+                        fx:id="updateButton"/>
+
+                <Button text="Process Changes"
+                        fx:id="processButton"/>
+
+                <Button text="Save Policy"
+                        fx:id="saveButton"/>
+
+            </HBox>
+
+        </VBox>
+    </center>
+
+    <!-- ===== BOTTOM STATUS AREA ===== -->
+    <bottom>
+        <VBox spacing="5">
+
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+
+            <Label text="Notification:"
+                   style="-fx-font-weight:bold;"/>
+
+            <Label fx:id="notificationLabel"
+                   text="Finance officer will be notified after update."/>
+
+            <Label fx:id="logLabel"
+                   text="System log status..."
+                   style="-fx-text-fill:gray;"/>
+
+        </VBox>
+    </bottom>
+
+</BorderPane>

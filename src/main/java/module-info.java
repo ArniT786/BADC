@@ -1,6 +1,7 @@
 module com.example.badc {
     requires javafx.controls;
     requires javafx.fxml;
+    requires jdk.httpserver;
 
     opens com.example.badc to javafx.fxml;
     opens com.example.badc.Mithila to javafx.fxml;

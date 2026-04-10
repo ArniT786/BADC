@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="550.0" prefWidth="700.0"
+            xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.badc.Meraj.Admin.AdminBADCController">
+
+    <children>
+
+        <!-- Title -->
+        <Label layoutX="170.0" layoutY="30.0"
+               text="Admin Dashboard (BADC Officer)">
+            <font>
+                <Font size="22.0"/>
+            </font>
+        </Label>
+
+        <!-- Dashboard -->
+        <Button layoutX="220.0" layoutY="100.0"
+                prefWidth="260.0" prefHeight="40.0"
+                text="Login Dashboard"
+                onAction="#handleLoginDashboard"/>
+
+        <!-- User Management -->
+        <Button layoutX="220.0" layoutY="150.0"
+                prefWidth="260.0" prefHeight="40.0"
+                text="User Management"
+                onAction="#handleManageUsers"/>
+
+        <!-- Pending Requests -->
+        <Button layoutX="220.0" layoutY="200.0"
+                prefWidth="260.0" prefHeight="40.0"
+                text="Pending Requests"
+                onAction="#handleApproveRequests"/>
+
+        <!-- Inventory -->
+        <Button layoutX="220.0" layoutY="250.0"
+                prefWidth="260.0" prefHeight="40.0"
+                text="Inventory Overview"
+                onAction="#handleInventoryOverview"/>
+
+        <!-- Subsidy Policies -->
+        <Button layoutX="220.0" layoutY="300.0"
+                prefWidth="260.0" prefHeight="40.0"
+                text="Manage Subsidy Policies"
+                onAction="#handleSubsidyPolicies"/>
+
+        <!-- Reports -->
+        <Button layoutX="220.0" layoutY="350.0"
+                prefWidth="260.0" prefHeight="40.0"
+                text="Generate Administrative Reports"
+                onAction="#handleGenerateReports"/>
+
+        <!-- System Configuration -->
+        <Button layoutX="220.0" layoutY="400.0"
+                prefWidth="260.0" prefHeight="40.0"
+                text="System Configuration"
+                onAction="#handleSystemConfiguration"/>
+
+        <!-- Logout -->
+        <Button layoutX="220.0" layoutY="450.0"
+                prefWidth="260.0" prefHeight="40.0"
+                text="Logout"
+                onAction="#handleLogout"/>
+
+    </children>
+
+</AnchorPane>

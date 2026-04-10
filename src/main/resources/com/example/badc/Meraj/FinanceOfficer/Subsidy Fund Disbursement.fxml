@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.badc.Meraj.FinanceOfficer.SubsidyController"
+            prefHeight="500.0" prefWidth="780.0">
+
+    <children>
+
+
+        <Label text="Subsidy Fund Disbursement"
+               layoutX="240"
+               layoutY="15"
+               style="-fx-font-size:20px; -fx-font-weight:bold;" />
+
+
+        <TableView fx:id="subsidyTable"
+                   layoutX="40"
+                   layoutY="60"
+                   prefHeight="260"
+                   prefWidth="700">
+
+            <columns>
+                <TableColumn fx:id="colBeneficiaryId"
+                             text="Beneficiary ID"
+                             prefWidth="140"/>
+
+                <TableColumn fx:id="colName"
+                             text="Name"
+                             prefWidth="200"/>
+
+                <TableColumn fx:id="colAmount"
+                             text="Subsidy Amount"
+                             prefWidth="150"/>
+
+                <TableColumn fx:id="colAccount"
+                             text="Account No"
+                             prefWidth="210"/>
+            </columns>
+
+        </TableView>
+
+
+        <Label text="Payment Details:"
+               layoutX="50"
+               layoutY="340"/>
+
+        <TextArea fx:id="txtPaymentDetails"
+                  layoutX="160"
+                  layoutY="330"
+                  prefHeight="70"
+                  prefWidth="420"/>
+
+        <Button text="Release Payment"
+                layoutX="220"
+                layoutY="420"
+                prefWidth="150"
+                onAction="#handleReleasePayment"/>
+
+        <Button text="Refresh List"
+                layoutX="400"
+                layoutY="420"
+                prefWidth="130"
+                onAction="#handleRefresh"/>
+
+    </children>
+
+</AnchorPane>
+
