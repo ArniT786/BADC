@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.Button?>
 
 <AnchorPane prefHeight="500.0" prefWidth="600.0" 
@@ -15,18 +16,18 @@
       <Label fx:id="title_lbl" layoutX="230.0" layoutY="30.0" text="Submit Report to HQ" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
       
       <Label fx:id="nid_lbl" layoutX="100.0" layoutY="85.0" text="Officer NID :" />
-      <TextField fx:id="nid_txt" layoutX="220.0" layoutY="81.0" prefWidth="250.0" />
+      <TextField fx:id="officerNid" layoutX="220.0" layoutY="81.0" prefWidth="250.0" />
       
       <Label fx:id="type_lbl" layoutX="100.0" layoutY="130.0" text="Report Type :" />
-      <ComboBox fx:id="type_cb" layoutX="220.0" layoutY="126.0" prefWidth="250.0" />
+      <ComboBox fx:id="reportTypeDrop" layoutX="220.0" layoutY="126.0" prefWidth="250.0" />
       
       <Label fx:id="cont_lbl" layoutX="100.0" layoutY="175.0" text="Report Content :" />
-      <TextField fx:id="cont_txt" layoutX="100.0" layoutY="205.0" prefWidth="400.0" prefHeight="100.0" />
+      <TextArea fx:id="reportArea" layoutX="100.0" layoutY="205.0" prefWidth="400.0" prefHeight="100.0" />
       
       <Button fx:id="sub_btn" layoutX="100.0" layoutY="330.0" onAction="#submitReport" prefWidth="120" text="Submit to HQ" />
       <Button fx:id="clr_btn" layoutX="230.0" layoutY="330.0" onAction="#clearForm" prefWidth="80" text="Clear" />
       <Button fx:id="back_btn" layoutX="320.0" layoutY="330.0" onAction="#goBack" prefWidth="80" text="Cancel" />
       
-      <Label fx:id="msg_lbl" layoutX="100.0" layoutY="390.0" text="" />
+      <Label fx:id="msgLabel" layoutX="100.0" layoutY="390.0" text="" />
    </children>
 </AnchorPane>

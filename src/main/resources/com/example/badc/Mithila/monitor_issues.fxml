@@ -2,7 +2,7 @@
 
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.Button?>
@@ -18,18 +18,18 @@
       <Button fx:id="load_btn" layoutX="50.0" layoutY="80.0" onAction="#loadIssues" text="Load All Issues" />
       <Button fx:id="back_btn" layoutX="170.0" layoutY="80.0" onAction="#goBack" text="Back" />
       
-      <TableView fx:id="issue_tbl" layoutX="50.0" layoutY="125.0" prefHeight="230.0" prefWidth="500.0">
+      <TableView fx:id="issueTable" layoutX="50.0" layoutY="125.0" prefHeight="230.0" prefWidth="500.0">
         <columns>
-          <TableColumn fx:id="id_col" prefWidth="90.0" text="Issue ID" />
-          <TableColumn fx:id="loc_col" prefWidth="120.0" text="Location" />
-          <TableColumn fx:id="desc_col" prefWidth="180.0" text="Description" />
-          <TableColumn fx:id="prio_col" prefWidth="100.0" text="Priority" />
+          <TableColumn fx:id="colId" prefWidth="90.0" text="Issue ID" />
+          <TableColumn fx:id="colLocation" prefWidth="120.0" text="Location" />
+          <TableColumn fx:id="colDesc" prefWidth="180.0" text="Description" />
+          <TableColumn fx:id="colPriority" prefWidth="100.0" text="Priority" />
         </columns>
       </TableView>
       
       <Label fx:id="det_lbl" layoutX="50.0" layoutY="370.0" text="Issue Detail :" />
-      <TextField fx:id="det_txt" layoutX="50.0" layoutY="395.0" prefWidth="500.0" prefHeight="60.0" />
+      <TextArea fx:id="detailArea" layoutX="50.0" layoutY="395.0" prefWidth="500.0" prefHeight="60.0" />
       
-      <Label fx:id="msg_lbl" layoutX="50.0" layoutY="465.0" text="" />
+      <Label fx:id="msgLabel" layoutX="50.0" layoutY="465.0" text="" />
    </children>
 </AnchorPane>

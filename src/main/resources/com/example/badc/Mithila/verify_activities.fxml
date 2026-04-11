@@ -17,25 +17,25 @@
       <Label fx:id="title_lbl" layoutX="180.0" layoutY="30.0" text="Verify Field Officer Activities" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
       
       <Label fx:id="name_lbl" layoutX="50.0" layoutY="85.0" text="Officer Name :" />
-      <ComboBox fx:id="name_cb" layoutX="170.0" layoutY="81.0" prefWidth="200.0" />
+      <ComboBox fx:id="officerDrop" layoutX="170.0" layoutY="81.0" prefWidth="200.0" />
       
       <Label fx:id="nid_lbl" layoutX="50.0" layoutY="130.0" text="Officer NID :" />
-      <TextField fx:id="nid_txt" layoutX="170.0" layoutY="126.0" prefWidth="200.0" />
+      <TextField fx:id="officerNid" layoutX="170.0" layoutY="126.0" prefWidth="200.0" />
       
       <Button fx:id="load_btn" layoutX="170.0" layoutY="175.0" onAction="#loadLogs" text="Load Logs" />
       <Button fx:id="back_btn" layoutX="260.0" layoutY="175.0" onAction="#goBack" text="Go Back" />
       
-      <TableView fx:id="log_tbl" layoutX="50.0" layoutY="220.0" prefHeight="180.0" prefWidth="500.0">
+      <TableView fx:id="logTable" layoutX="50.0" layoutY="220.0" prefHeight="180.0" prefWidth="500.0">
         <columns>
-          <TableColumn fx:id="date_col" prefWidth="110.0" text="Date" />
-          <TableColumn fx:id="summ_col" prefWidth="240.0" text="Activity Summary" />
-          <TableColumn fx:id="stat_col" prefWidth="120.0" text="Status" />
+          <TableColumn fx:id="colDate" prefWidth="110.0" text="Date" />
+          <TableColumn fx:id="colSummary" prefWidth="240.0" text="Activity Summary" />
+          <TableColumn fx:id="colStat" prefWidth="120.0" text="Status" />
         </columns>
       </TableView>
       
       <Button fx:id="app_btn" layoutX="50.0" layoutY="415.0" onAction="#approveLog" text="Approve" />
       <Button fx:id="rej_btn" layoutX="150.0" layoutY="415.0" onAction="#rejectLog" text="Reject" />
       
-      <Label fx:id="msg_lbl" layoutX="50.0" layoutY="460.0" text="" />
+      <Label fx:id="msgLabel" layoutX="50.0" layoutY="460.0" text="" />
    </children>
 </AnchorPane>
