@@ -68,6 +68,6 @@ public class LogVisitController implements Initializable {
 
     @FXML
     private void goBack(ActionEvent event) {
-        SceneSwitcher.switchScene(event, "/Mithila/field_officer_dashboard.fxml");
+        SceneSwitcher.switchScene(event, "/com/example/badc/Mithila/field_officer_dashboard.fxml");
     }
 }

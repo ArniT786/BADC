@@ -17,7 +17,7 @@ public class HelloApplication extends Application {
             UserService.initDummyUsers();
             TaskService.initDummyTasks();
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Mithila/login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/badc/login.fxml"));
             Parent root = loader.load();
             stage.setScene(new Scene(root));
             stage.setTitle("BADC System");

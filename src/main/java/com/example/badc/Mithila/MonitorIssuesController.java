@@ -32,6 +32,6 @@ public class MonitorIssuesController implements Initializable {
 
     @FXML
     private void goBack(ActionEvent event) {
-        SceneSwitcher.switchScene(event, "/Mithila/report_officer_dashboard.fxml");
+        SceneSwitcher.switchScene(event, "/com/example/badc/Mithila/report_officer_dashboard.fxml");
     }
 }

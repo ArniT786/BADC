@@ -1,20 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.badc.LoginController">
+<AnchorPane prefHeight="500.0" prefWidth="600.0" style="-fx-background-color: #f4f7f6;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.badc.LoginController">
     <children>
-          <Label fx:id="lblMessage" text="" />
-      <Label layoutX="87.0" layoutY="107.0" text="NID :" />
-      <TextField fx:id="nidField" layoutX="134.0" layoutY="103.0" prefWidth="200" text="1212121212" />
-      <Label layoutX="59.0" layoutY="150.0" text="Password :" />
-      <PasswordField fx:id="passField" layoutX="134.0" layoutY="146.0" prefWidth="200" text="111111" />
-            <Button layoutX="134.0" layoutY="196.0" onAction="#handleLogin" prefHeight="38.0" prefWidth="70.0" text="Login" />
-            <Button layoutX="249.0" layoutY="203.0" onAction="#goToSignup" text="Sign Up" />
-          <Label layoutX="219.0" layoutY="56.0" text="BADC System Login" />
+        <VBox alignment="CENTER" layoutX="150.0" layoutY="50.0" prefWidth="300.0" spacing="20" style="-fx-background-color: white; -fx-padding: 40; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="50.0">
+            <children>
+                <Label text="BADC System" textFill="#2e7d32">
+                    <font>
+                        <Font name="System Bold" size="28.0" />
+                    </font>
+                </Label>
+                <Label text="Log in to your account" textFill="#757575">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="10.0" />
+                    </VBox.margin>
+                </Label>
+                
+                <VBox spacing="5" alignment="CENTER_LEFT">
+                    <Label text="NID (10 digits)" textFill="#424242" />
+                    <TextField fx:id="nidField" prefHeight="40.0" promptText="Enter your NID" style="-fx-background-radius: 5;" text="1234567890" />
+                </VBox>
+                
+                <VBox spacing="5" alignment="CENTER_LEFT">
+                    <Label text="Password" textFill="#424242" />
+                    <PasswordField fx:id="passField" prefHeight="40.0" promptText="Enter your password" style="-fx-background-radius: 5;" text="rahim123" />
+                </VBox>
+                
+                <Label fx:id="lblMessage" textFill="#d32f2f" wrapText="true" />
+                
+                <Button maxWidth="Infinity" onAction="#handleLogin" prefHeight="45.0" style="-fx-background-color: #2e7d32; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5; -fx-cursor: hand;" text="Login" />
+                
+                <HBox alignment="CENTER" spacing="5">
+                    <Label text="Don't have an account?" textFill="#757575" />
+                    <Button onAction="#goToSignup" style="-fx-background-color: transparent; -fx-text-fill: #2e7d32; -fx-font-weight: bold; -fx-padding: 0; -fx-cursor: hand;" text="Sign up" />
+                </HBox>
+            </children>
+        </VBox>
     </children>
 </AnchorPane>
+

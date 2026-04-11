@@ -36,4 +36,9 @@ public class FarmerDashboardController implements Initializable {
     @FXML private void openScheduleView(ActionEvent event) { switchScene(event, "/com/example/badc/Arnima/schedule_view.fxml"); }
     @FXML private void openTrackStatus(ActionEvent event) { switchScene(event, "/com/example/badc/Arnima/track_status.fxml"); }
     @FXML private void openFeedback(ActionEvent event) { switchScene(event, "/com/example/badc/Arnima/feedback.fxml"); }
+
+    @FXML
+    private void handleLogout(ActionEvent event) {
+        switchScene(event, "/com/example/badc/login.fxml");
+    }
 }

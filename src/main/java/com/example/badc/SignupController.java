@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -24,7 +25,12 @@ public class SignupController implements Initializable {
     @FXML private ComboBox<String> roleDrop;
     @FXML private Label msgLabel;
 
-    // Role-specific fields & their labels (managed visibility)
+    // Role-specific field containers
+    @FXML private VBox districtContainer;
+    @FXML private VBox deptContainer;
+    @FXML private VBox shopNameContainer;
+    @FXML private VBox shopDistrictContainer;
+
     @FXML private Label districtLabel;
     @FXML private TextField districtField;
     @FXML private Label deptLabel;
@@ -46,10 +52,10 @@ public class SignupController implements Initializable {
         String role = roleDrop.getValue();
         if (role == null) return;
         switch (role) {
-            case "FARMER" -> setVisible(districtLabel, districtField);
-            case "SEED_DEALER" -> setVisible(shopNameLabel, shopNameField, shopDistrictLabel, shopDistrictField);
-            case "FIELD_OFFICER" -> setVisible(districtLabel, districtField);
-            case "REPORT_OFFICER" -> setVisible(deptLabel, deptField);
+            case "FARMER" -> setVisible(districtContainer);
+            case "SEED_DEALER" -> setVisible(shopNameContainer, shopDistrictContainer);
+            case "FIELD_OFFICER" -> setVisible(districtContainer);
+            case "REPORT_OFFICER" -> setVisible(deptContainer);
         }
     }
 
@@ -124,8 +130,7 @@ public class SignupController implements Initializable {
 
     // --- Helpers ---
     private void hideAllRoleFields() {
-        setHidden(districtLabel, districtField, deptLabel, deptField,
-                  shopNameLabel, shopNameField, shopDistrictLabel, shopDistrictField);
+        setHidden(districtContainer, deptContainer, shopNameContainer, shopDistrictContainer);
     }
 
     private void setVisible(javafx.scene.Node... nodes) {

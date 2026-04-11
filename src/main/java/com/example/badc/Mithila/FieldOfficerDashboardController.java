@@ -28,41 +28,41 @@ public class FieldOfficerDashboardController implements Initializable {
 
     @FXML
     private void openRegisterFarmer(ActionEvent event) {
-        SceneSwitcher.switchScene(event, "/Mithila/register_farmer.fxml");
+        SceneSwitcher.switchScene(event, "/com/example/badc/Mithila/register_farmer.fxml");
     }
 
     @FXML
     private void openCropInspection(ActionEvent event) {
-        SceneSwitcher.switchScene(event, "/Mithila/crop_inspection.fxml");
+        SceneSwitcher.switchScene(event, "/com/example/badc/Mithila/crop_inspection.fxml");
     }
 
     @FXML
     private void openDistribute(ActionEvent event) {
-        SceneSwitcher.switchScene(event, "/Mithila/distribute_input.fxml");
+        SceneSwitcher.switchScene(event, "/com/example/badc/Mithila/distribute_input.fxml");
     }
 
     @FXML
     private void openLogVisit(ActionEvent event) {
-        SceneSwitcher.switchScene(event, "/Mithila/log_visit.fxml");
+        SceneSwitcher.switchScene(event, "/com/example/badc/Mithila/log_visit.fxml");
     }
 
     @FXML
     private void openCropYield(ActionEvent event) {
-        SceneSwitcher.switchScene(event, "/Mithila/crop_yield.fxml");
+        SceneSwitcher.switchScene(event, "/com/example/badc/Mithila/crop_yield.fxml");
     }
 
     @FXML
     private void openDailyReport(ActionEvent event) {
-        SceneSwitcher.switchScene(event, "/Mithila/daily_report.fxml");
+        SceneSwitcher.switchScene(event, "/com/example/badc/Mithila/daily_report.fxml");
     }
 
     @FXML
     private void openViewTasks(ActionEvent event) {
-        SceneSwitcher.switchScene(event, "/Mithila/view_tasks.fxml");
+        SceneSwitcher.switchScene(event, "/com/example/badc/Mithila/view_tasks.fxml");
     }
 
     @FXML
     private void handleLogout(ActionEvent event) {
-        SceneSwitcher.switchScene(event, "/Mithila/login.fxml");
+        SceneSwitcher.switchScene(event, "/com/example/badc/login.fxml");
     }
 }

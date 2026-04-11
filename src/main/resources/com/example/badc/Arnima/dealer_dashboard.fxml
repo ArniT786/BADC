@@ -22,6 +22,8 @@
                 <Button fx:id="btnEarnings" text="View Commission and Earnings" onAction="#openEarnings" maxWidth="Infinity" />
                 <Button fx:id="btnUpdateShop" text="Update Shop Information" onAction="#openUpdateShop" maxWidth="Infinity" />
                 <Button fx:id="btnNotices" text="View Notices from BADC" onAction="#openNotices" maxWidth="Infinity" />
+                <Separator />
+                <Button text="Logout" onAction="#handleLogout" maxWidth="Infinity" style="-fx-background-color: #d32f2f; -fx-text-fill: white;" />
             </children>
         </VBox>
     </children>

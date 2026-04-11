@@ -38,4 +38,9 @@ public class DealerDashboardController implements Initializable {
     @FXML private void openEarnings(ActionEvent event) { switchScene(event, "/com/example/badc/Arnima/view_earnings.fxml"); }
     @FXML private void openUpdateShop(ActionEvent event) { switchScene(event, "/com/example/badc/Arnima/update_shop.fxml"); }
     @FXML private void openNotices(ActionEvent event) { switchScene(event, "/com/example/badc/Arnima/view_notices.fxml"); }
+
+    @FXML
+    private void handleLogout(ActionEvent event) {
+        switchScene(event, "/com/example/badc/login.fxml");
+    }
 }

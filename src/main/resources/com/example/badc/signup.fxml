@@ -5,77 +5,115 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="620.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.badc.SignupController">
-    <VBox spacing="12" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <padding>
-            <Insets bottom="30.0" left="50.0" right="50.0" top="30.0" />
-        </padding>
-        <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="New User Registration" />
-        <Separator />
-
-        <!-- Common fields -->
-        <GridPane hgap="10" vgap="12">
-            <Label text="Full Name :" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-            <TextField fx:id="nameField" prefWidth="220" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-
-            <Label text="NID (10 digits) :" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-            <TextField fx:id="nidField" prefWidth="220" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-
-            <Label text="Password :" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-            <PasswordField fx:id="passField" prefWidth="220" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-
-            <Label text="Phone :" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-            <TextField fx:id="phoneField" prefWidth="220" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-
-            <Label text="Role :" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-            <ComboBox fx:id="roleDrop" onAction="#onRoleChanged" prefWidth="220" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-         <columnConstraints>
-            <ColumnConstraints />
-            <ColumnConstraints />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-         </rowConstraints>
-        </GridPane>
-
-        <Separator />
-
-        <!-- Role-specific fields panel -->
-        <GridPane hgap="10" vgap="12">
-            <!-- Field Officer / Farmer fields -->
-            <Label fx:id="districtLabel" managed="false" text="District :" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-            <TextField fx:id="districtField" managed="false" prefWidth="220" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-
-            <!-- Report Officer field -->
-            <Label fx:id="deptLabel" managed="false" text="Department :" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-            <TextField fx:id="deptField" managed="false" prefWidth="220" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-
-            <!-- Seed Dealer fields -->
-            <Label fx:id="shopNameLabel" managed="false" text="Shop Name :" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-            <TextField fx:id="shopNameField" managed="false" prefWidth="220" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-
-            <Label fx:id="shopDistrictLabel" managed="false" text="Shop District :" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-            <TextField fx:id="shopDistrictField" managed="false" prefWidth="220" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-        </GridPane>
-
-        <Separator />
-        <HBox spacing="10">
-            <Button onAction="#handleSignup" style="-fx-background-color: #8f0;" text="Register" />
-            <Button onAction="#goBack" text="Back to Login" />
-        </HBox>
-        <Label fx:id="msgLabel" wrapText="true" />
-    </VBox>
+<AnchorPane prefHeight="650.0" prefWidth="600.0" style="-fx-background-color: #f4f7f6;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.badc.SignupController">
+   <children>
+      <VBox alignment="TOP_CENTER" spacing="20.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="20.0">
+         <padding>
+            <Insets bottom="30.0" left="40.0" right="40.0" top="30.0" />
+         </padding>
+         <children>
+            <Label text="Create Account" textFill="#2e7d32">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label text="Please fill in the details below" textFill="#757575" />
+            
+            <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: white;" VBox.vgrow="ALWAYS">
+               <content>
+                  <VBox spacing="15.0">
+                     <children>
+                        <VBox spacing="5.0">
+                           <children>
+                              <Label text="Full Name" textFill="#424242" />
+                              <TextField fx:id="nameField" prefHeight="35.0" promptText="Your full name" style="-fx-background-radius: 5;" />
+                           </children>
+                        </VBox>
+                        
+                        <VBox spacing="5.0">
+                           <children>
+                              <Label text="NID (10 digits)" textFill="#424242" />
+                              <TextField fx:id="nidField" prefHeight="35.0" promptText="Enter 10-digit NID" style="-fx-background-radius: 5;" />
+                           </children>
+                        </VBox>
+                        
+                        <VBox spacing="5.0">
+                           <children>
+                              <Label text="Password" textFill="#424242" />
+                              <PasswordField fx:id="passField" prefHeight="35.0" promptText="At least 6 characters" style="-fx-background-radius: 5;" />
+                           </children>
+                        </VBox>
+                        
+                        <VBox spacing="5.0">
+                           <children>
+                              <Label text="Phone Number" textFill="#424242" />
+                              <TextField fx:id="phoneField" prefHeight="35.0" promptText="e.g. 01712345678" style="-fx-background-radius: 5;" />
+                           </children>
+                        </VBox>
+                        
+                        <VBox spacing="5.0">
+                           <children>
+                              <Label text="Role" textFill="#424242" />
+                              <ComboBox fx:id="roleDrop" maxWidth="Infinity" onAction="#onRoleChanged" prefHeight="35.0" promptText="Select your role" style="-fx-background-radius: 5;" />
+                           </children>
+                        </VBox>
+                        
+                        <Separator prefWidth="200.0" />
+                        
+                        <VBox fx:id="roleSpecificContainer" spacing="15.0">
+                           <children>
+                              <VBox fx:id="districtContainer" spacing="5.0">
+                                 <children>
+                                    <Label fx:id="districtLabel" text="District" textFill="#424242" />
+                                    <TextField fx:id="districtField" prefHeight="35.0" style="-fx-background-radius: 5;" />
+                                 </children>
+                              </VBox>
+                              
+                              <VBox fx:id="deptContainer" spacing="5.0">
+                                 <children>
+                                    <Label fx:id="deptLabel" text="Department" textFill="#424242" />
+                                    <TextField fx:id="deptField" prefHeight="35.0" style="-fx-background-radius: 5;" />
+                                 </children>
+                              </VBox>
+                              
+                              <VBox fx:id="shopNameContainer" spacing="5.0">
+                                 <children>
+                                    <Label fx:id="shopNameLabel" text="Shop Name" textFill="#424242" />
+                                    <TextField fx:id="shopNameField" prefHeight="35.0" style="-fx-background-radius: 5;" />
+                                 </children>
+                              </VBox>
+                              
+                              <VBox fx:id="shopDistrictContainer" spacing="5.0">
+                                 <children>
+                                    <Label fx:id="shopDistrictLabel" text="Shop District" textFill="#424242" />
+                                    <TextField fx:id="shopDistrictField" prefHeight="35.0" style="-fx-background-radius: 5;" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </content>
+            </ScrollPane>
+            
+            <VBox spacing="10.0">
+               <children>
+                  <Label fx:id="msgLabel" textFill="#d32f2f" wrapText="true" />
+                  <Button maxWidth="Infinity" onAction="#handleSignup" prefHeight="45.0" style="-fx-background-color: #2e7d32; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5; -fx-cursor: hand;" text="Register" />
+                  <Button maxWidth="Infinity" onAction="#goBack" prefHeight="45.0" style="-fx-background-color: transparent; -fx-text-fill: #757575; -fx-background-radius: 5; -fx-border-color: #e0e0e0; -fx-border-radius: 5; -fx-cursor: hand;" text="Back to Login" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
 </AnchorPane>
+
