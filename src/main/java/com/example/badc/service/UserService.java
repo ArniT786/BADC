@@ -32,6 +32,12 @@ public class UserService {
         list.add(new SeedDealer("SD001", "Rafiqul Islam",  "3333333330", "dealer123", "01777777777", "Al-Amin Seeds",  "Dhaka"));
         list.add(new SeedDealer("SD002", "Moriyom Khatun", "4444444440", "dealer456", "01788888888", "Green Agro Shop","Chittagong"));
 
+        // Admin
+        list.add(new AdminUser("AD001", "Admin Boss", "9999999999", "admin123", "01999999999", "Headquarters"));
+
+        // Finance
+        list.add(new FinanceOfficer("FI001", "Finance Chief", "8888888888", "finance123", "01888888888", "Accounts"));
+
         FileService.saveList(FILE, list);
     }
 

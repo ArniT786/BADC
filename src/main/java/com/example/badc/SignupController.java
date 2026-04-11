@@ -42,7 +42,7 @@ public class SignupController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        roleDrop.getItems().addAll("FARMER", "SEED_DEALER", "FIELD_OFFICER", "REPORT_OFFICER");
+        roleDrop.getItems().addAll("Farmer", "Seed Dealer", "Field Officer", "Report Officer", "Admin (BADC Officer)", "Finance Officer (BADC Finance Officer)");
         hideAllRoleFields();
     }
 
@@ -52,10 +52,9 @@ public class SignupController implements Initializable {
         String role = roleDrop.getValue();
         if (role == null) return;
         switch (role) {
-            case "FARMER" -> setVisible(districtContainer);
-            case "SEED_DEALER" -> setVisible(shopNameContainer, shopDistrictContainer);
-            case "FIELD_OFFICER" -> setVisible(districtContainer);
-            case "REPORT_OFFICER" -> setVisible(deptContainer);
+            case "Farmer", "Field Officer" -> setVisible(districtContainer);
+            case "Seed Dealer" -> setVisible(shopNameContainer, shopDistrictContainer);
+            case "Report Officer", "Admin (BADC Officer)", "Finance Officer (BADC Finance Officer)" -> setVisible(deptContainer);
         }
     }
 
@@ -80,27 +79,37 @@ public class SignupController implements Initializable {
 
         // --- Role-specific validations and object creation ---
         switch (role) {
-            case "FARMER" -> {
+            case "Farmer" -> {
                 String district = districtField.getText().trim();
                 if (district.isEmpty()) { msgLabel.setText("District is required for Farmer."); return; }
                 user = new FarmerUser(userId, name, nid, pass, phone, district);
             }
-            case "SEED_DEALER" -> {
+            case "Seed Dealer" -> {
                 String shopName     = shopNameField.getText().trim();
                 String shopDistrict = shopDistrictField.getText().trim();
                 if (shopName.isEmpty())     { msgLabel.setText("Shop name is required."); return; }
                 if (shopDistrict.isEmpty()) { msgLabel.setText("Shop district is required."); return; }
                 user = new SeedDealer(userId, name, nid, pass, phone, shopName, shopDistrict);
             }
-            case "FIELD_OFFICER" -> {
+            case "Field Officer" -> {
                 String district = districtField.getText().trim();
                 if (district.isEmpty()) { msgLabel.setText("District is required for Field Officer."); return; }
                 user = new FieldOfficer(userId, name, nid, pass, phone, district, "SUP001");
             }
-            case "REPORT_OFFICER" -> {
+            case "Report Officer" -> {
                 String dept = deptField.getText().trim();
                 if (dept.isEmpty()) { msgLabel.setText("Department is required for Report Officer."); return; }
                 user = new ReportOfficer(userId, name, nid, pass, phone, dept);
+            }
+            case "Admin (BADC Officer)" -> {
+                String dept = deptField.getText().trim();
+                if (dept.isEmpty()) { msgLabel.setText("Department is required for Admin."); return; }
+                user = new AdminUser(userId, name, nid, pass, phone, dept);
+            }
+            case "Finance Officer (BADC Finance Officer)" -> {
+                String dept = deptField.getText().trim();
+                if (dept.isEmpty()) { msgLabel.setText("Section is required for Finance Officer."); return; }
+                user = new FinanceOfficer(userId, name, nid, pass, phone, dept);
             }
             default -> { msgLabel.setText("Unknown role selected."); return; }
         }
