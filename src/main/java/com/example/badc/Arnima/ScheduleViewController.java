@@ -1,39 +1,62 @@
 package com.example.badc.Arnima;
 
+import com.example.badc.Arnima.service.ScheduleService;
+import com.example.badc.model.Schedule;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.ArrayList;
 
-public class ScheduleViewController implements Initializable {
-
+public class ScheduleViewController {
     @FXML private ComboBox<String> cmbDistrict;
-    @FXML private TableView<?> tblSchedule;
-    @FXML private TableColumn<?, String> colDistrict;
-    @FXML private TableColumn<?, String> colDate;
-    @FXML private TableColumn<?, String> colLocation;
-    @FXML private TableColumn<?, String> colSeedType;
+    @FXML private TableView<Schedule> tblSchedule;
+    @FXML private TableColumn<Schedule, String> colDistrict, colDate, colLocation, colSeedType;
     @FXML private Label lblMessage;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {}
+    public void initialize() {
+        cmbDistrict.getItems().addAll("Dhaka","Rajshahi","Chittagong","Sylhet","Khulna","Barisal","Rangpur","Mymensingh");
+        colDistrict.setCellValueFactory(new PropertyValueFactory<>("district"));
+        colDate.setCellValueFactory(new PropertyValueFactory<>("deliveryDate"));
+        colLocation.setCellValueFactory(new PropertyValueFactory<>("location"));
+        colSeedType.setCellValueFactory(new PropertyValueFactory<>("seedType"));
+    }
 
-    @FXML private void searchSchedule(ActionEvent event) {}
-    @FXML private void goBack(ActionEvent event) {
+    @FXML
+    public void searchSchedule(ActionEvent e) {
+        System.out.println("search schedule");
+        String d = cmbDistrict.getValue() == null ? "" : cmbDistrict.getValue();
+        if (d.isEmpty()) {
+            lblMessage.setText("Please select a district");
+        } else {
+            ScheduleService svc = new ScheduleService();
+            ArrayList<Schedule> list = svc.getByDistrict(d);
+            if (list.isEmpty()) {
+                lblMessage.setText("No schedule found for " + d);
+                tblSchedule.getItems().clear();
+            } else {
+                tblSchedule.setItems(FXCollections.observableArrayList(list));
+                lblMessage.setText("Found " + list.size() + " schedule(s) for " + d);
+            }
+        }
+    }
+
+    @FXML
+    public void goBack(ActionEvent e) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/badc/Arnima/farmer_dashboard.fxml"));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(loader.load()));
-            stage.show();
-        } catch (Exception e) { e.printStackTrace(); }
+            Parent p = FXMLLoader.load(getClass().getResource("/com/example/badc/Arnima/farmer_dashboard.fxml"));
+            Stage s = (Stage) cmbDistrict.getScene().getWindow();
+            s.setScene(new Scene(p));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }

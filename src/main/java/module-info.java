@@ -7,6 +7,8 @@ module com.example.badc {
     opens com.example.badc.Arnima to javafx.fxml;
     opens com.example.badc.model to javafx.base;
     opens com.example.badc.service to javafx.base;
+    opens com.example.badc.Arnima.service to javafx.base;
+
 
     exports com.example.badc;
     exports com.example.badc.model;

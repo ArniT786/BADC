@@ -1,55 +1,84 @@
 package com.example.badc.Arnima;
 
-import javafx.collections.FXCollections;
+import com.example.badc.Arnima.service.IrrigationService;
+import com.example.badc.model.IrrigationRequest;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import java.net.URL;
-import java.util.ResourceBundle;
 
-public class IrrigationRequestController implements Initializable {
-
-    @FXML private TextField txtNID;
-    @FXML private TextField txtLandSize;
-    @FXML private TextField txtLocation;
+public class IrrigationRequestController {
+    @FXML private TextField txtNID, txtLandSize, txtLocation;
     @FXML private ComboBox<String> cmbPumpType;
-    @FXML private Label lblTrackingID;
-    @FXML private Label lblMessage;
+    @FXML private Label lblTrackingID, lblMessage;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        cmbPumpType.setItems(FXCollections.observableArrayList("Power Pump (Low Lift)", "Deep Tube Well", "Hand Pump"));
+    public void initialize() {
+        cmbPumpType.getItems().addAll("Shallow Tube Well","Deep Tube Well","Power Pump");
     }
 
     @FXML
-    private void submitRequest(ActionEvent event) {
-        if (txtNID.getText().isEmpty() || txtLandSize.getText().isEmpty() || txtLocation.getText().isEmpty() || cmbPumpType.getValue() == null) {
-            lblMessage.setText("Error: Required fields are missing.");
-        } else {
-            lblTrackingID.setText("Tracking ID: BADC-IRR-" + (int)(Math.random() * 9000 + 1000));
-            lblMessage.setText("Success: Irrigation request submitted.");
+    public void submitRequest(ActionEvent e) {
+        System.out.println("irrigation submit");
+        try {
+            String id = txtNID.getText();
+            String ls = txtLandSize.getText();
+            String loc = txtLocation.getText();
+            String pt = cmbPumpType.getValue() == null ? "" : cmbPumpType.getValue();
+
+            if (id.isEmpty() || ls.isEmpty() || loc.isEmpty() || pt.isEmpty()) {
+                lblMessage.setText("All fields are required");
+            } else if (!id.matches("\\d{10}|\\d{13}")) {
+                lblMessage.setText("NID must be 10 or 13 digits");
+            } else if (loc.length() < 5) {
+                lblMessage.setText("Please provide a full location");
+            } else {
+                double land = Double.parseDouble(ls);
+                if (land <= 0) {
+                    lblMessage.setText("Land size must be greater than zero");
+                } else if (land > 50) {
+                    lblMessage.setText("Max land size limit is 50 acres");
+                } else {
+                    String tid = "IRR" + System.currentTimeMillis();
+                    IrrigationRequest req = new IrrigationRequest(tid, id, land, loc, pt);
+                    IrrigationService svc = new IrrigationService();
+                    boolean ok = svc.save(req);
+                    if (ok) {
+                        lblTrackingID.setText("Your Tracking ID: " + tid);
+                        lblMessage.setText("Request submitted successfully!");
+                        clearForm();
+                    } else {
+                        lblMessage.setText("Could not save. Try again.");
+                    }
+                }
+            }
+        } catch (NumberFormatException ex) {
+            lblMessage.setText("Land size must be a number");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            lblMessage.setText("Error: " + ex.getMessage());
         }
     }
 
-    @FXML private void clearForm(ActionEvent event) {
-        txtNID.clear(); txtLandSize.clear(); txtLocation.clear();
-        cmbPumpType.getSelectionModel().clearSelection();
-        lblMessage.setText(""); lblTrackingID.setText("");
+    public void clearForm() {
+        txtNID.clear();
+        txtLandSize.clear();
+        txtLocation.clear();
+        cmbPumpType.setValue(null);
     }
 
-    @FXML private void goBack(ActionEvent event) {
+    @FXML
+    public void goBack(ActionEvent e) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/badc/Arnima/farmer_dashboard.fxml"));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(loader.load()));
-            stage.show();
-        } catch (Exception e) { e.printStackTrace(); }
+            Parent p = FXMLLoader.load(getClass().getResource("/com/example/badc/Arnima/farmer_dashboard.fxml"));
+            Stage s = (Stage) txtNID.getScene().getWindow();
+            s.setScene(new Scene(p));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }

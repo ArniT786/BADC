@@ -1,44 +1,88 @@
 package com.example.badc.Arnima;
 
+import com.example.badc.Arnima.service.ScheduleService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import java.net.URL;
-import java.util.ResourceBundle;
 
-public class FarmerDashboardController implements Initializable {
+public class FarmerDashboardController {
 
-    @FXML private Button btnSeedApplication;
-    @FXML private Button btnIrrigation;
-    @FXML private Button btnSchedule;
-    @FXML private Button btnTrack;
-    @FXML private Button btnFeedback;
+    @FXML private Button btnSeedApplication, btnIrrigation, btnSchedule, btnTrack, btnFeedback;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {}
-
-    private void switchScene(ActionEvent event, String fxml) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(loader.load()));
-            stage.show();
-        } catch (Exception e) { e.printStackTrace(); }
+    public void initialize() {
+        new ScheduleService().initDummySchedules();
     }
-
-    @FXML private void openSeedApplication(ActionEvent event) { switchScene(event, "/com/example/badc/Arnima/seed_application.fxml"); }
-    @FXML private void openIrrigationRequest(ActionEvent event) { switchScene(event, "/com/example/badc/Arnima/irrigation_request.fxml"); }
-    @FXML private void openScheduleView(ActionEvent event) { switchScene(event, "/com/example/badc/Arnima/schedule_view.fxml"); }
-    @FXML private void openTrackStatus(ActionEvent event) { switchScene(event, "/com/example/badc/Arnima/track_status.fxml"); }
-    @FXML private void openFeedback(ActionEvent event) { switchScene(event, "/com/example/badc/Arnima/feedback.fxml"); }
 
     @FXML
-    private void handleLogout(ActionEvent event) {
-        switchScene(event, "/com/example/badc/login.fxml");
+    public void openSeedApplication(ActionEvent event) {
+        try {
+            Parent p = FXMLLoader.load(getClass().getResource("/com/example/badc/Arnima/seed_application.fxml"));
+            Stage s = (Stage) btnSeedApplication.getScene().getWindow();
+            s.setScene(new Scene(p));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void openIrrigationRequest(ActionEvent event) {
+        try {
+            Parent p = FXMLLoader.load(getClass().getResource("/com/example/badc/Arnima/irrigation_request.fxml"));
+            Stage s = (Stage) btnIrrigation.getScene().getWindow();
+            s.setScene(new Scene(p));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void openScheduleView(ActionEvent event) {
+        try {
+            Parent p = FXMLLoader.load(getClass().getResource("/com/example/badc/Arnima/schedule_view.fxml"));
+            Stage s = (Stage) btnSchedule.getScene().getWindow();
+            s.setScene(new Scene(p));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void openTrackStatus(ActionEvent event) {
+        try {
+            Parent p = FXMLLoader.load(getClass().getResource("/com/example/badc/Arnima/track_status.fxml"));
+            Stage s = (Stage) btnTrack.getScene().getWindow();
+            s.setScene(new Scene(p));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void openFeedback(ActionEvent event) {
+        try {
+            Parent p = FXMLLoader.load(getClass().getResource("/com/example/badc/Arnima/feedback.fxml"));
+            Stage s = (Stage) btnFeedback.getScene().getWindow();
+            s.setScene(new Scene(p));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void handleLogout(ActionEvent event) {
+        System.out.println("logout clicked");
+        try {
+            Parent p = FXMLLoader.load(getClass().getResource("/com/example/badc/login.fxml"));
+            Stage s = (Stage) btnSeedApplication.getScene().getWindow();
+            s.setScene(new Scene(p));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
+
+
