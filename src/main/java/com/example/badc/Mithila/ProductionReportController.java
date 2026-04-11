@@ -1,49 +1,94 @@
 package com.example.badc.Mithila;
 
+import com.example.badc.model.ProductionRecord;
+import com.example.badc.service.ProductionService;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
-import com.example.badc.SceneSwitcher;
 
 public class ProductionReportController implements Initializable {
 
-    @FXML private TextField crop_txt;
-    @FXML private ComboBox<String> seas_cb;
-    @FXML private TextField nid_txt;
-    @FXML private TableView<?> prod_tbl;
-    @FXML private TableColumn<?, String> nid_col;
-    @FXML private TableColumn<?, String> crop_col;
-    @FXML private TableColumn<?, String> seas_col;
-    @FXML private TableColumn<?, Double> wt_col;
-    @FXML private Label msg_lbl;
+    @FXML private TextField cropField;
+    @FXML private ComboBox<String> seasonDrop;
+    @FXML private TextField officerNid;
+    @FXML private TableView<ProductionRecord> productionTable;
+    @FXML private TableColumn<ProductionRecord, String> colFarmer;
+    @FXML private TableColumn<ProductionRecord, String> colCrop;
+    @FXML private TableColumn<ProductionRecord, String> colSeason;
+    @FXML private TableColumn<ProductionRecord, Double> colWeight;
+    @FXML private Label msgLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        seas_cb.getItems().addAll("Rabi 2024", "Kharif 2024", "Rabi 2025");
+        seasonDrop.getItems().addAll("Rabi 2024", "Kharif 2024", "Rabi 2025", "Kharif 2025");
+        
+        colFarmer.setCellValueFactory(new PropertyValueFactory<>("farmerNid"));
+        colCrop.setCellValueFactory(new PropertyValueFactory<>("cropType"));
+        colSeason.setCellValueFactory(new PropertyValueFactory<>("season"));
+        colWeight.setCellValueFactory(new PropertyValueFactory<>("harvestWeight"));
     }
 
     @FXML
-    private void generateReport(ActionEvent event) {
-        msg_lbl.setText("Generating report...");
+    public void generateReport(ActionEvent e) {
+        String cropVal = cropField.getText().trim();
+        if (cropVal.isEmpty()) {
+            msgLabel.setText("Crop type is required");
+            return;
+        }
+
+        String seasonVal = seasonDrop.getValue();
+        if (seasonVal == null) {
+            msgLabel.setText("Please select a season");
+            return;
+        }
+
+        String officerNidVal = officerNid.getText().trim();
+        if (officerNidVal.isEmpty()) {
+            msgLabel.setText("Officer NID is required");
+            return;
+        }
+
+        List<ProductionRecord> resultList = ProductionService.getByCropAndSeason(cropVal, seasonVal);
+        if (resultList.isEmpty()) {
+            msgLabel.setText("No production records found");
+            return;
+        }
+
+        productionTable.setItems(FXCollections.observableArrayList(resultList));
+        double totalVal = ProductionService.getTotalProduction(cropVal, seasonVal);
+        msgLabel.setText("Total production for " + cropVal + " in " + seasonVal + ": " + totalVal + " kg");
     }
 
     @FXML
-    private void clearForm(ActionEvent event) {
-        crop_txt.clear();
-        seas_cb.setValue(null);
-        nid_txt.clear();
-        msg_lbl.setText("");
+    public void clearForm(ActionEvent e) {
+        cropField.clear();
+        seasonDrop.setValue(null);
+        officerNid.clear();
+        productionTable.getItems().clear();
+        msgLabel.setText("");
     }
 
     @FXML
-    private void goBack(ActionEvent event) {
-        SceneSwitcher.switchScene(event, "/com/example/badc/Mithila/report_officer_dashboard.fxml");
+    public void goBack(ActionEvent e) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/badc/Mithila/report_officer_dashboard.fxml"));
+            Stage stage = (Stage) cropField.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception ex) {
+            // file operations wrap catch
+        }
     }
 }

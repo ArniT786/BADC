@@ -1,40 +1,77 @@
 package com.example.badc.Mithila;
 
+import com.example.badc.model.Farmer;
+import com.example.badc.service.FarmerService;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
-import com.example.badc.SceneSwitcher;
 
 public class FarmerSummaryController implements Initializable {
 
-    @FXML private ComboBox<String> reg_cb;
-    @FXML private TextField nid_txt;
-    @FXML private TableView<?> farmer_tbl;
-    @FXML private TableColumn<?, String> nid_col;
-    @FXML private TableColumn<?, String> name_col;
-    @FXML private TableColumn<?, String> reg_col;
-    @FXML private TableColumn<?, String> land_col;
-    @FXML private Label msg_lbl;
+    @FXML private ComboBox<String> regionBox;
+    @FXML private TextField officerNid;
+    @FXML private TableView<Farmer> farmerTable;
+    @FXML private TableColumn<Farmer, String> colNid;
+    @FXML private TableColumn<Farmer, String> colName;
+    @FXML private TableColumn<Farmer, String> colRegion;
+    @FXML private TableColumn<Farmer, String> colLand;
+    @FXML private Label msgLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        reg_cb.getItems().addAll("Dhaka", "Rajshahi", "Chittagong", "Sylhet");
+        regionBox.getItems().addAll("Dhaka", "Rajshahi", "Chittagong", "Sylhet", "Khulna", "Barisal", "Rangpur", "Mymensingh");
+        
+        colNid.setCellValueFactory(new PropertyValueFactory<>("nid"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colRegion.setCellValueFactory(new PropertyValueFactory<>("district"));
+        colLand.setCellValueFactory(new PropertyValueFactory<>("landSize"));
     }
 
     @FXML
-    private void generateReport(ActionEvent event) {
-        msg_lbl.setText("Report generation logic goes here.");
+    public void generateReport(ActionEvent e) {
+        String officerNidVal = officerNid.getText().trim();
+        if (officerNidVal.isEmpty()) {
+            msgLabel.setText("Officer NID is required");
+            return;
+        }
+
+        String regionVal = regionBox.getValue();
+        if (regionVal == null) {
+            msgLabel.setText("Please select a region");
+            return;
+        }
+
+        List<Farmer> resultList = FarmerService.getByDistrict(regionVal);
+        if (resultList.isEmpty()) {
+            msgLabel.setText("No farmers found in " + regionVal);
+            return;
+        }
+
+        farmerTable.setItems(FXCollections.observableArrayList(resultList));
+        msgLabel.setText("Found " + resultList.size() + " farmer(s) in " + regionVal);
     }
 
     @FXML
-    private void goBack(ActionEvent event) {
-        SceneSwitcher.switchScene(event, "/com/example/badc/Mithila/report_officer_dashboard.fxml");
+    public void goBack(ActionEvent e) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/badc/Mithila/report_officer_dashboard.fxml"));
+            Stage stage = (Stage) regionBox.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception ex) {
+            // file operations wrap catch
+        }
     }
 }
